@@ -6,11 +6,11 @@ public class Room {
     private Room east;
     private Room south;
 
-    public Room(String name) {
+    public Room(String name, String description) {
         this.name = name;
         this.description = description;
     }
-
+//setter
     public void setNorth(Room north) {
         this.north = north;
     }
@@ -27,6 +27,7 @@ public class Room {
         this.south = south;
     }
 
+    //gettzz
     public String getName() {
         return name;
     }

@@ -2,37 +2,63 @@ import java.util.Scanner;
 
 public class Adventure {
     private Room currentRoom;
-    //room declaration
-    private Room
-    room1,
-    room2,
-    room3,
-    room4,
-    room5,
-    room6,
-    room7,
-    room8,
-    room9;
 
-public Adventure() {
+    public Adventure() {
         createRooms();
-        welcomeUser();
-        startGame();
     }
 
-//room creator with random temporary description
-    private void createRooms() {
-                room1 = new Room(" BLANK 1");
-                room2 = new Room("BLANK 2");
-                room3 = new Room("BLANK 3");
-                room4 = new Room("BLANK 4");
-                room5 = new Room("BLANK 5");
-                room6 = new Room("BLANK 6");
-                room7 = new Room("BLANK 7");
-                room8 = new Room("BLANK 8");
-                room9 = new Room("BLANK 9");
+    public void startGame() {
+        System.out.println("\nWelcome to the adventure game!");
+        System.out.println("In this game you will be navigating through 9 different relms");
+        System.out.println("\nUse the following commands to navigate between rooms:\n- north \n- east  \n- south \n- west.");
+        System.out.println("Abreviations:" + "\n[" + "n,e,s, w" + "]" );
+        System.out.println("- 'look around' for placement description. \n- 'help' for instructions. \n- 'exit' to leave the game.");
+        System.out.println("\n Enter [Start] to start the game.");
+        Scanner scanner = new Scanner(System.in);
 
-//setters
+        while (true) {
+            System.out.print("> ");
+            String command = scanner.nextLine().trim().toLowerCase();
+
+            if (command.equals("exit")) {
+                System.out.println("Thanks for playing!");
+                break;
+            } else if (command.equals("start")) {
+                System.out.println(currentRoom.getDescription());
+            } else if (command.equals("help")) {
+                printHelp();
+            } else if (command.equals("look")) {
+                System.out.println(currentRoom.getDescription());
+            } else if (command.startsWith("go ")) {
+                move(command.substring(3));
+            } else if (command.equals("north") || command.equals("n")) {
+                move("north");
+            } else if (command.equals("east") || command.equals("e")) {
+                move("east");
+            } else if (command.equals("south") || command.equals("s")) {
+                move("south");
+            } else if (command.equals("west") || command.equals("w")) {
+                move("west");
+            } else {
+                System.out.println("Invalid command.");
+            }
+        }
+
+        scanner.close();
+    }
+
+    private void createRooms() {
+        Room room1 = new Room("Room 1", "Temporary Blank room ");
+        Room room2 = new Room("Room 2", "Temporary Blank room.");
+        Room room3 = new Room("Room 3",  "Temporary Blank room.");
+        Room room4 = new Room("Room 4", "Temporary Blank room.");
+        Room room5 = new Room("Room 5",  "Temporary Blank room.");
+        Room room6 = new Room("Room 6",  "Temporary Blank room.");
+        Room room7 = new Room("Room 7", "Y Temporary Blank room.");
+        Room room8 = new Room("Room 8", "Temporary Blank room.");
+        Room room9 = new Room("Room 9", "Temporary Blank room.");
+
+        //setters
         room1.setEast(room2);
         room1.setSouth(room4);
 
@@ -63,121 +89,43 @@ public Adventure() {
         currentRoom = room1;
     }
 
-private void welcomeUser() {
-    System.out.println("\nWelcome to the adventure game!");
-    System.out.println("In this game you will be navigating through 9 different relms");
-    System.out.println("\nUse the following commands to navigate between rooms:\n- north \n- east  \n- west.");
-    System.out.println("\nAbreviations:" + "\n[" + "n,e,s, w" + "]" );
-    System.out.println("\n- 'look around' for placement description. \n- 'help' for instructions. \n- 'exit' to leave the game.");
-    System.out.println("\n Enter [play] to start the game.");
-    Scanner scanner = new Scanner(System.in);
-
-    while (true) {
-        System.out.print("> ");
-        String input = scanner.nextLine().toLowerCase();
-        if (input.equals("play")) {
-            startGame();
-            break;
-        }
-    }
-    scanner.close();
-}
-
-    private void showInstructions() {
-        System.out.println("\ncommands: ");
-        System.out.println("\nNavigation: \n- north \n- east  \n- west.");
-        System.out.println("Abreviations:" + "\n[" + "n,e,s, w" + "]" );
-        System.out.println("\n- 'look around' for placement description. \n- 'help' for instructions. \n- 'exit' to leave the game.");
-        System.out.println("\n Enter 'play' to start the game.");
-
-
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.print("> ");
-            String input = scanner.nextLine().toLowerCase();
-            if (input.equals("play")) {
-                startGame();
-                break;
-
-            }
-        }
-        scanner.close();
-    }
-
-    private void startGame() {
-Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("\nyou have now arrived at " + currentRoom.getName());
-            System.out.println("> ");
-            String command = scanner.nextLine().toLowerCase();
-
-            if (command.equals("exit")) {
-                System.out.println("thank you for playing!");
-                break;
-
-            } else if (command.startsWith("look")) {
-                System.out.println(currentRoom.getDescription());
-            } else if (command.startsWith("go ")) {
-                move(command.substring(3));
-
-            } else if (command.equals("north") || command.startsWith("n")) {
-                move("north");
-
-            } else if (command.equals("south") || command.startsWith("s")) {
-                move("south");
-
-            } else if (command.equals("west") || command.startsWith("w")) {
-                move("west");
-
-            } else if (command.equals("east") || command.startsWith("e")) {
-                move("east");
-
-            } else if (command.equals("help")) {
-                showInstructions();
-
-            } else {
-                System.out.println("Invalid command. PLease try again or enter 'help' for command list.");
-            }
-        }
-        scanner.close();
-    }
-
-
-    private void lookAround() {
-        System.out.println(currentRoom.getDescription());
-    }
-
     private void move(String direction) {
         Room nextRoom = null;
 
         switch (direction) {
             case "north":
-            case "n" :
                 nextRoom = currentRoom.getNorth();
                 break;
-
             case "east":
-            case "e":
                 nextRoom = currentRoom.getEast();
                 break;
-
             case "south":
-            case "s" :
                 nextRoom = currentRoom.getSouth();
                 break;
-
             case "west":
-            case "w":
                 nextRoom = currentRoom.getWest();
                 break;
-
+            default:
+                System.out.println("The path you have chosen is unavailable");
+                return;
         }
 
+        if (nextRoom != null) {
+            currentRoom = nextRoom;
+            System.out.println("You moved to " + currentRoom.getName());
+            System.out.println(currentRoom.getDescription());
+        } else {
+            System.out.println("The path you have chosen is unavailable");
+        }
     }
 
+    private void printHelp() {
+        System.out.println("Available commands:");
+        System.out.println("start - Begin the game");
+        System.out.println("\nUse the following commands to navigate between rooms:\n- north \n- east  \n- west.");
+        System.out.println("\nAbreviations:" + "\n[" + "n,e,s, w" + "]" );
+        System.out.println("\n- 'look around' for placement description. \n- 'help' for instructions. \n- 'exit' to leave the game.");
+        System.out.println("\n Enter [Start] to start the game.");
+
+    }
 }
-
-
-
