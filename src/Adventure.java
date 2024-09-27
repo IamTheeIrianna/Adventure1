@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Adventure {
     private Room currentRoom;
+    //room declaration
     private Room
     room1,
     room2,
@@ -18,18 +19,18 @@ public Adventure() {
         welcomeUser();
         startGame();
     }
-//create rooms with random temporary description
 
+//room creator with random temporary description
     private void createRooms() {
-                room1 = new Room ("");
-                room2 = new Room("green");
-                room3 = new Room("red");
-                room4 = new Room("yellow");
-                room5 = new Room("purple");
-                room6 = new Room("orange");
-                room7 = new Room("black");
-                room8 = new Room("pink");
-                room9 = new Room("...");
+                room1 = new Room(" BLANK 1");
+                room2 = new Room("BLANK 2");
+                room3 = new Room("BLANK 3");
+                room4 = new Room("BLANK 4");
+                room5 = new Room("BLANK 5");
+                room6 = new Room("BLANK 6");
+                room7 = new Room("BLANK 7");
+                room8 = new Room("BLANK 8");
+                room9 = new Room("BLANK 9");
 
 //setters
         room1.setEast(room2);
@@ -63,39 +64,32 @@ public Adventure() {
     }
 
 private void welcomeUser() {
-    System.out.println("Welcome to the adventure game!");
-    System.out.println("\nIn this game you will be navigating through 9 different relms");
-    System.out.println("\nUse the following commands to navigate between rooms: \nnorth, south, east and west.");
-    System.out.println("\nShorter abbreviations may also be used, such as: \nn,e,s and w");
-    System.out.println("\nEnter 'look around' to get a description of your current location. \n Insert 'help' for instructions. \n Insert 'exit' to leave the game.");
-    System.out.println("\nplease enter 'play' to start the game.");
-    System.out.println("\nEnter 'go' to view game instructions and to start playing");
-
+    System.out.println("\nWelcome to the adventure game!");
+    System.out.println("In this game you will be navigating through 9 different relms");
+    System.out.println("\nUse the following commands to navigate between rooms:\n- north \n- east  \n- west.");
+    System.out.println("\nAbreviations:" + "\n[" + "n,e,s, w" + "]" );
+    System.out.println("\n- 'look around' for placement description. \n- 'help' for instructions. \n- 'exit' to leave the game.");
+    System.out.println("\n Enter [play] to start the game.");
     Scanner scanner = new Scanner(System.in);
 
     while (true) {
-        System.out.println("> ");
+        System.out.print("> ");
         String input = scanner.nextLine().toLowerCase();
-        if (input.equals("go")) {
-            showInstructions();
+        if (input.equals("play")) {
+            startGame();
             break;
-
-        } else {
-            System.out.println("Enter 'go' to continue");
         }
     }
     scanner.close();
 }
 
     private void showInstructions() {
-        System.out.println("\nAvailable commands: ");
-        System.out.println(" To navigate through the rooms you can use these following commands:");
-        System.out.println("enter the follwing commands to navigate to the retrospective door: north, east ,  south or west");
-        System.out.println("You may also use the shorter abreviated versions: n, e, s, w ");
-        System.out.println("Enter 'look' to get a description of the current room");
-        System.out.println("Enter 'help' for command overview ");
-        System.out.println("to exit game enter 'exit'");
-        System.out.println("\n Type 'play' to start the adventure game!");
+        System.out.println("\ncommands: ");
+        System.out.println("\nNavigation: \n- north \n- east  \n- west.");
+        System.out.println("Abreviations:" + "\n[" + "n,e,s, w" + "]" );
+        System.out.println("\n- 'look around' for placement description. \n- 'help' for instructions. \n- 'exit' to leave the game.");
+        System.out.println("\n Enter 'play' to start the game.");
+
 
         Scanner scanner = new Scanner(System.in);
 
@@ -106,8 +100,6 @@ private void welcomeUser() {
                 startGame();
                 break;
 
-            } else {
-                System.out.println("Enter 'play' to start the game.");
             }
         }
         scanner.close();
@@ -118,7 +110,6 @@ Scanner scanner = new Scanner(System.in);
 
         while (true) {
             System.out.println("\nyou have now arrived at " + currentRoom.getName());
-            System.out.println(currentRoom.getDescription());
             System.out.println("> ");
             String command = scanner.nextLine().toLowerCase();
 
@@ -165,49 +156,27 @@ Scanner scanner = new Scanner(System.in);
             case "north":
             case "n" :
                 nextRoom = currentRoom.getNorth();
-                System.out.println("heading north");
                 break;
 
             case "east":
             case "e":
                 nextRoom = currentRoom.getEast();
-                System.out.println("heading east");
                 break;
 
             case "south":
             case "s" :
-                System.out.println("heading south");
                 nextRoom = currentRoom.getSouth();
                 break;
 
             case "west":
             case "w":
-                System.out.println("heading west");
                 nextRoom = currentRoom.getWest();
                 break;
 
-            default:
-                System.out.println("this path cannot be accessed. Enter 'help' for command list ");
-                return;
         }
 
-        if(nextRoom != null) {
-            currentRoom = nextRoom;
-            System.out.println("heading towards " + currentRoom.getName());
-        } else {
-            System.out.println("The chosen direction is unavailable");
-        }
     }
-    private void showHelp() {
-        System.out.println("\nAvailable commands:");
-        System.out.println("- go north / n");
-        System.out.println("- go east / e");
-        System.out.println("- go south / s");
-        System.out.println("- go west / w");
-        System.out.println("- look");
-        System.out.println("- help");
-        System.out.println("- exit");
-    }
+
 }
 
 

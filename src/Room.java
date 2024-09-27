@@ -6,7 +6,7 @@ public class Room {
     private Room east;
     private Room south;
 
-    public Room(String name, String description) {
+    public Room(String name) {
         this.name = name;
         this.description = description;
     }
