@@ -3,11 +3,11 @@ import java.util.ArrayList;
 public class Adventure {
     private Player player;
     private UserInterface ui;
-    private Map map;
+    private Map theCircle;
 
     public Adventure() {
-        map = new Map();
-        player = new Player(map.getStartingRoom());
+        theCircle = new Map();
+        player = new Player(theCircle.getStartingRoom());
         ui = new UserInterface(this);
     }
 
