@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Room {
     private String name;
     private String description;
@@ -5,12 +7,15 @@ public class Room {
     private Room west;
     private Room east;
     private Room south;
+    private ArrayList<Item> items;
 
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
+        this.items = new ArrayList<>();
     }
-//setter
+
+    // Setters
     public void setNorth(Room north) {
         this.north = north;
     }
@@ -27,25 +32,49 @@ public class Room {
         this.south = south;
     }
 
-    //gettzz
+    // Getters
     public String getName() {
         return name;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
-    public Room getEast(){
-    return east;
+    public Room getEast() {
+        return east;
     }
+
     public Room getNorth() {
         return north;
     }
+
     public Room getSouth() {
         return south;
     }
+
     public Room getWest() {
         return west;
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public Item findItem(String shortName) {
+        for (Item item : items) {
+            if (item.getShortName().equalsIgnoreCase(shortName)) {
+                return item;
+            }
+        }
+        return null;
     }
 }
