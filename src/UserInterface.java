@@ -73,7 +73,7 @@ public class UserInterface {
         System.out.println("\nUse the following commands to navigate between rooms:\n- north \n- east  \n- west.");
         System.out.println("\nAbbreviations:" + "\n[" + "n,e,s, w" + "]");
         System.out.println("\n- 'inventory' or 'inv' or 'invent' to see your inventory.");
-        System.out.println("\n- 'take [item]' to take an item.");
+        System.out.println("\n- 'take [item]' to pick up an item.");
         System.out.println("\n- 'drop [item]' to drop an item.");
         System.out.println("\n- 'look around' for placement description. \n- 'help' for instructions. \n- 'exit' to leave the game.");
         System.out.println("\n Enter [Start] to start the game.");

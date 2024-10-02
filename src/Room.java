@@ -7,29 +7,29 @@ public class Room {
     private Room west;
     private Room east;
     private Room south;
-    private ArrayList<Item> items;
+    private ArrayList<Item> roomItems;
 
     public Room(String name, String description) {
-        this.name = name;
-        this.description = description;
-        this.items = new ArrayList<>();
+        name = name;
+        description = description;
+        roomItems = new ArrayList<>();
     }
 
     // Setters
     public void setNorth(Room north) {
-        this.north = north;
+        north = north;
     }
 
     public void setEast(Room east) {
-        this.east = east;
+        east = east;
     }
 
     public void setWest(Room west) {
-        this.west = west;
+        west = west;
     }
 
     public void setSouth(Room south) {
-        this.south = south;
+        south = south;
     }
 
     // Getters
@@ -58,19 +58,19 @@ public class Room {
     }
 
     public void addItem(Item item) {
-        items.add(item);
+        roomItems.add(item);
     }
 
     public void removeItem(Item item) {
-        items.remove(item);
+        roomItems.remove(item);
     }
 
     public ArrayList<Item> getItems() {
-        return items;
+        return roomItems;
     }
 
     public Item findItem(String shortName) {
-        for (Item item : items) {
+        for (Item item : roomItems) {
             if (item.getShortName().equalsIgnoreCase(shortName)) {
                 return item;
             }
