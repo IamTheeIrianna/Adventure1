@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class Room {
     private String name;
     private String description;
+    private String shortDescription;
+    private String longDescription;
     private Room north;
     private Room west;
     private Room east;
@@ -17,19 +19,19 @@ public class Room {
 
     // Setters
     public void setNorth(Room north) {
-        north = north;
+        this.north = north;
     }
 
     public void setEast(Room east) {
-        east = east;
+        this.east = east;
     }
 
     public void setWest(Room west) {
-        west = west;
+        this.west = west;
     }
 
     public void setSouth(Room south) {
-        south = south;
+        this.south = south;
     }
 
     // Getters

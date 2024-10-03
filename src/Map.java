@@ -45,7 +45,7 @@ public class Map {
         TheValleyOfTheUnknown.setWest(VanityFair);
 
         // Add items to rooms
-        TheCityOfShadows.addItem(new Item("feelings", "thoughts"));
+        TheCityOfShadows.addItem(new Item("feelings from the self", "thoughts"));
         TheWickedGate.addItem(new Item("Self accept", "Conformity"));
         TheSloughOfDespair.addItem(new Item("to be discovered", "dreams"));
         TheMountainOfSorrow.addItem(new Item("cross the mountain", "return to comfort"));
