@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Player {
     private Room currentRoom;
     private ArrayList<Item> inventory;
+    private int health;
 
     public Player(Room startingRoom) {
         this.currentRoom = startingRoom;
@@ -57,7 +58,7 @@ public class Player {
 
     public Item findItem(String shortName) {
         for (Item item : inventory) {
-            if (item.getShortName().equalsIgnoreCase(shortName)) {
+            if (item.getDescription().equalsIgnoreCase(shortName)) {
                 return item;
             }
         }
@@ -69,7 +70,7 @@ public class Player {
         if (item != null) {
             currentRoom.removeItem(item);
             addItem(item);
-            System.out.println("You've chosen the " + item.getLongName());
+            System.out.println("You've chosen the " + item.getShortName());
 
         } else {
             System.out.println("There is no such " + shortName + " object here");
@@ -81,7 +82,7 @@ public class Player {
         if (item != null) {
             removeItem(item);
             currentRoom.addItem(item);
-            System.out.println("You've dropped the " + item.getLongName());
+            System.out.println("You've dropped the " + item.getShortName());
         } else {
             System.out.println("There is no such item as " + shortName + " in your inventory");
         }

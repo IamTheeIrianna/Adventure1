@@ -5,57 +5,57 @@ public class Map {
         createRooms();
     }
 
-    private void createRooms() {
-        Room TheCityOfShadows = new Room("The city of shadows", " here you are just a silhouette \nmade from particles of light");
-        Room TheWickedGate = new Room("The Wicked Gate", "In this relm you will find the cousins judgment and critisism");
-        Room TheSloughOfDespair = new Room("The Slough of despair", "Surrounded by your old conciousness");
-        Room TheMountainOfSorrow = new Room("The mountain of sorrow", "Life begins on the other side");
-        Room ThePalace = new Room("The Palace", "Your conciousness has been reset but you remain a silhouette");
-        Room TheValleyOfHumiliation = new Room("The valley of Humiliation", "In this realm you will find humiliation");
-        Room CelestialCity = new Room("Celestial city", "Where thoughts and the physical self seize to exist. \nOnly feelings remain");
-        Room VanityFair = new Room("Vanity fair", "Cousins with the valley of humiliation");
-        Room TheValleyOfTheUnknown = new Room("The valley of the unknown", " \nWhatever you imagine the new world to be.");
+    public void createRooms() {
+        Room theCityOfShadows = new Room("The city of shadows", "Here you are just a silhouette \nmade from particles of light");
+        Room theWickedGate = new Room("The Wicked Gate", "In this relm you will find the cousins judgment and critisism");
+        Room theSloughOfDespair = new Room("The Slough of despair", "Surrounded by your old conciousness");
+        Room theMountainOfSorrow = new Room("The mountain of sorrow", "Life begins on the other side");
+        Room thePalace = new Room("The Palace", "Your conciousness has been reset but you remain a silhouette");
+        Room theValleyOfHumiliation = new Room("The valley of Humiliation", "In this realm you will find humiliation");
+        Room celestialCity = new Room("Celestial city", "Where thoughts and the physical self seize to exist. \nOnly feelings remain");
+        Room vanityFair = new Room("Vanity fair", "Cousins with the valley of humiliation");
+        Room theValleyOfTheUnknown = new Room("The valley of the unknown", " \nWhatever you imagine the new world to be.");
 
         // Setters
-        TheCityOfShadows.setEast(TheWickedGate);
-        TheCityOfShadows.setSouth(TheMountainOfSorrow);
+        theCityOfShadows.setEast(theWickedGate);
+        theCityOfShadows.setSouth(theMountainOfSorrow);
 
-        TheWickedGate.setWest(TheCityOfShadows);
-        TheWickedGate.setEast(TheSloughOfDespair);
+        theWickedGate.setWest(theCityOfShadows);
+        theWickedGate.setEast(theSloughOfDespair);
 
-        TheSloughOfDespair.setWest(TheWickedGate);
-        TheSloughOfDespair.setSouth(TheValleyOfHumiliation);
+        theSloughOfDespair.setWest(theWickedGate);
+        theSloughOfDespair.setSouth(theValleyOfHumiliation);
 
-        TheMountainOfSorrow.setNorth(TheCityOfShadows);
-        TheMountainOfSorrow.setSouth(CelestialCity);
+        theMountainOfSorrow.setNorth(theCityOfShadows);
+        theMountainOfSorrow.setSouth(celestialCity);
 
-        ThePalace.setSouth(VanityFair);
+        thePalace.setSouth(vanityFair);
 
-        TheValleyOfHumiliation.setNorth(TheSloughOfDespair);
-        TheValleyOfHumiliation.setSouth(TheValleyOfTheUnknown);
+        theValleyOfHumiliation.setNorth(theSloughOfDespair);
+        theValleyOfHumiliation.setSouth(theValleyOfTheUnknown);
 
-        CelestialCity.setNorth(TheMountainOfSorrow);
-        CelestialCity.setEast(VanityFair);
+        celestialCity.setNorth(theMountainOfSorrow);
+        celestialCity.setEast(vanityFair);
 
-        VanityFair.setNorth(ThePalace);
-        VanityFair.setEast(TheValleyOfTheUnknown);
-        VanityFair.setWest(CelestialCity);
+        vanityFair.setNorth(thePalace);
+        vanityFair.setEast(theValleyOfTheUnknown);
+        vanityFair.setWest(celestialCity);
 
-        TheValleyOfTheUnknown.setNorth(TheValleyOfHumiliation);
-        TheValleyOfTheUnknown.setWest(VanityFair);
+        theValleyOfTheUnknown.setNorth(theValleyOfHumiliation);
+        theValleyOfTheUnknown.setWest(vanityFair);
 
         // Add items to rooms
-        TheCityOfShadows.addItem(new Item("feelings from the self", "thoughts"));
-        TheWickedGate.addItem(new Item("Self accept", "Conformity"));
-        TheSloughOfDespair.addItem(new Item("to be discovered", "dreams"));
-        TheMountainOfSorrow.addItem(new Item("cross the mountain", "return to comfort"));
-        ThePalace.addItem(new Item("wisdom", "knowledge"));
-        TheValleyOfHumiliation.addItem(new Item("Humility", "Wrath"));
-        CelestialCity.addItem(new Item("soul", "physical self"));
-        VanityFair.addItem(new Item("ego", "blindness"));
-        TheValleyOfTheUnknown.addItem(new Item("currency", "Eternal supply of food"));
+        theCityOfShadows.addItem(new Item("feelings from the self", "Feelings"));
+        theWickedGate.addItem(new Item("Self accept", "Conformity"));
+        theSloughOfDespair.addItem(new Item("to be discovered", "dreams"));
+        theMountainOfSorrow.addItem(new Item("cross the mountain", "return to comfort"));
+        thePalace.addItem(new Item("wisdom", "knowledge"));
+        theValleyOfHumiliation.addItem(new Item("Humility", "Wrath"));
+        celestialCity.addItem(new Item("soul", "physical self"));
+        vanityFair.addItem(new Item("ego", "blindness"));
+        theValleyOfTheUnknown.addItem(new Item("currency", "Eternal supply of food"));
 
-        startingRoom = TheCityOfShadows;
+        startingRoom = theCityOfShadows;
     }
 
     public Room getStartingRoom() {

@@ -54,9 +54,9 @@ public class UserInterface {
     }
 
     private void printRoomItems() {
-        System.out.println("Current room items:");
+        System.out.println("\nCurrent room items:");
         for (Item item : adventure.getCurrentRoomItems()) {
-            System.out.println("- " + item.getLongName());
+            System.out.println("- " + item.getShortName());
         }
     }
 
