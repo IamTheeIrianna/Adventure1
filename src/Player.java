@@ -1,91 +1,49 @@
 import java.util.ArrayList;
 
 public class Player {
+
     private Room currentRoom;
     private ArrayList<Item> inventory;
     private int health;
-//---------------------------------------------
+    //---------------------------------------------
     public Player(Room startingRoom) {
         this.currentRoom = startingRoom;
         this.inventory = new ArrayList<>();
-        this.health = 100;
+        //---------------------------------------------
+        this.health = 100; // Example starting health
     }
     //---------------------------------------------
     public Room getCurrentRoom() {
         return currentRoom;
     }
     //---------------------------------------------
-    public void move(String direction) {
-        Room nextRoom = null;
+    public void setCurrentRoom(Room currentRoom) { this.currentRoom = currentRoom; }
+    //---------------------------------------------
+    public ArrayList<Item> getInventory() { return inventory; }
+    //---------------------------------------------
+    public int getHealth() { return health; }
+    //---------------------------------------------
+    public void eat(Food food) {
+        health += food.getHealthPoints();
+        System.out.println("Your health is now: " + health);
+    }
+    //---------------------------------------------
+    public void addItem(Item item) { inventory.add(item); }
 
-        switch (direction) {
-            case "north":
-                nextRoom = currentRoom.getNorth();
-                break;
-            case "east":
-                nextRoom = currentRoom.getEast();
-                break;
-            case "south":
-                nextRoom = currentRoom.getSouth();
-                break;
-            case "west":
-                nextRoom = currentRoom.getWest();
-                break;
-            default:
-                System.out.println("The path you have chosen is unavailable");
-                return;
-        }
+    public void removeItem(Item item) { inventory.remove(item); }
 
-        if (nextRoom != null) {
-            currentRoom = nextRoom;
-            System.out.println("You've headed to ' " + currentRoom.getName());
-            System.out.println(currentRoom.getDescription());
-        } else {
-            System.out.println("The path you have chosen is unavailable");
-        }
-    }
-    //---------------------------------------------
-    public void addItem(Item item) {
-        inventory.add(item);
-    }
-    //---------------------------------------------
-    public void removeItem(Item item) {
-        inventory.remove(item);
-    }
-    //---------------------------------------------
-    public ArrayList<Item> getInventory() {
-        return inventory;
-    }
-    //---------------------------------------------
-    public Item findItem(String shortName) {
+    public Item findItem(String itemName) {
         for (Item item : inventory) {
-            if (item.getDescription().equalsIgnoreCase(shortName)) {
-                return item;
+            if (item.getShortName().equalsIgnoreCase(itemName)) {
+                return item; // Return the found item
             }
         }
-        return null;
+        return null; // Not found
     }
-    //---------------------------------------------
-    public void takeItem(String shortName) {
-        Item item = currentRoom.findItem(shortName);
-        if (item != null) {
-            currentRoom.removeItem(item);
-            addItem(item);
-            System.out.println("You've chosen the " + item.getShortName());
-
-        } else {
-            System.out.println("There is no such " + shortName + " object here");
-        }
-    }
-    //---------------------------------------------
-    public void dropItem(String shortName) {
-        Item item = findItem(shortName);
-        if (item != null) {
-            removeItem(item);
-            currentRoom.addItem(item);
-            System.out.println("You've dropped the " + item.getShortName());
-        } else {
-            System.out.println("There is no such item as " + shortName + " in your inventory");
-        }
+    //----------------------------------------
+    // Attack method
+    public void attack(Enemy enemy) {
+        System.out.println("You've attacked" + enemy.getName() + "!");
+        enemy.takeDamage(10); // Example damage value
     }
 }

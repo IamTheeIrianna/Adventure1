@@ -1,65 +1,73 @@
 public class Map {
-    private Room startingRoom;
+
+    private Room theLine, theStone, theBronze, time, ironDome, theFall, eraOfEval, renaissance,theEntrapment;
 
     public Map() {
         createRooms();
+        connectRooms();
+        addItemsToRooms();
     }
-
-    public Room createRooms() {
-        Room theCityOfShadows = new Room("The city of shadows", "Here you are just a silhouette \nmade from particles of light");
-        Room theWickedGate = new Room("The Wicked Gate", "In this relm you will find the cousins judgment and critisism");
-        Room theSloughOfDespair = new Room("The Slough of despair", "Surrounded by your old conciousness");
-        Room theMountainOfSorrow = new Room("The mountain of sorrow", "Life begins on the other side");
-        Room thePalace = new Room("The Palace", "Your conciousness has been reset but you remain a silhouette");
-        Room theValleyOfHumiliation = new Room("The valley of Humiliation", "In this realm you will find humiliation");
-        Room celestialCity = new Room("Celestial city", "Where thoughts and the physical self seize to exist. \nOnly feelings remain");
-        Room vanityFair = new Room("Vanity fair", "Cousins with the valley of humiliation");
-        Room theValleyOfTheUnknown = new Room("The valley of the unknown", " \nWhatever you imagine the new world to be.");
-
-        // Setters
-        theCityOfShadows.setEast(theWickedGate);
-        theCityOfShadows.setSouth(theMountainOfSorrow);
-
-        theWickedGate.setWest(theCityOfShadows);
-        theWickedGate.setEast(theSloughOfDespair);
-
-        theSloughOfDespair.setWest(theWickedGate);
-        theSloughOfDespair.setSouth(theValleyOfHumiliation);
-
-        theMountainOfSorrow.setNorth(theCityOfShadows);
-        theMountainOfSorrow.setSouth(celestialCity);
-
-        thePalace.setSouth(vanityFair);
-
-        theValleyOfHumiliation.setNorth(theSloughOfDespair);
-        theValleyOfHumiliation.setSouth(theValleyOfTheUnknown);
-
-        celestialCity.setNorth(theMountainOfSorrow);
-        celestialCity.setEast(vanityFair);
-
-        vanityFair.setNorth(thePalace);
-        vanityFair.setEast(theValleyOfTheUnknown);
-        vanityFair.setWest(celestialCity);
-
-        theValleyOfTheUnknown.setNorth(theValleyOfHumiliation);
-        theValleyOfTheUnknown.setWest(vanityFair);
-
-        // Add items to rooms
-        theCityOfShadows.addItem(new Item("D ", " DD"));
-        theWickedGate.addItem(new Item(" C", " CC"));
-        theSloughOfDespair.addItem(new Item(" B", "BB "));
-        theMountainOfSorrow.addItem(new Item("A ", " AA"));
-        thePalace.addItem(new Item("wisdom", " WW"));
-        theValleyOfHumiliation.addItem(new Item("E ", " EE"));
-        celestialCity.addItem(new Item("soul", "EE "));
-        vanityFair.addItem(new Item("ego", " EE"));
-        theValleyOfTheUnknown.addItem(new Item("currency", " GG"));
-
-        startingRoom = theCityOfShadows;
-        return theCityOfShadows;
+    //---------------------------------------------
+//room creation
+    private void createRooms() {
+        theLine = new Room("The line of existence", "In the dark with nothing but an infinite luminous line");
+        theStone = new Room("The age of the stone", "You are in the DOS dimension. A place in the dark where luminous lines begin to attatch, \nforming luminous floating geometric shapes");
+        theBronze = new Room("Age of bronze", "The particles of light have multiplied into a dark luminous tree dimensional forest ");
+        time = new Room("Room 4", "You are on a spaceship.");
+        ironDome = new Room("Room 5", "You are in the central chamber.");
+        theFall = new Room("Room 6", "You are in a tranquil garden.");
+        eraOfEval = new Room("Room 7", "You are in a bustling market.");
+        renaissance = new Room("Room 8", "You are on a high mountain.");
+        theEntrapment = new Room("Room 9", "You are in an ancient temple.");
     }
+    //---------------------------------------------
+    //room location setters
+    private void connectRooms() {
+        // Example: No room to the north of Room 1
+        //map setting
+        theLine.setEast(theStone); // 'theLine' connects east to 'theStone'
+        theLine.setSouth(ironDome); // 'theLine' connects south to 'ironDome'
 
+        theStone.setWest(theLine); // 'theStone' connects west to 'theLine'
+        theStone.setEast(theBronze); // 'theStone' connects east to 'theBronze'
+
+        theBronze.setWest(theStone); // 'theBronze' connects west to 'theStone'
+        theBronze.setSouth(eraOfEval); // 'theBronze' connects south to 'eraOfEval'
+
+        ironDome.setNorth(theLine); // 'ironDome' connects north to 'theLine'
+        ironDome.setSouth(theFall); // 'ironDome' connects south to 'theFall'
+
+        theFall.setSouth(renaissance); // 'theFall' connects south to 'renaissance'
+
+        eraOfEval.setNorth(theBronze); // 'eraOfEval' connects north to 'theBronze'
+        eraOfEval.setSouth(theEntrapment); // 'eraOfEval' connects south to 'das'
+
+        theFall.setNorth(ironDome); // 'theFall' connects north to 'ironDome'
+        theFall.setEast(renaissance); // 'theFall' connects east to 'renaissance'
+
+        renaissance.setWest(theFall); // 'renaissance' connects west to 'theFall'
+        renaissance.setNorth(theFall); // 'renaissance' connects north to 'theFall'
+
+        theEntrapment.setNorth(eraOfEval);
+
+        //---------------------------------------------
+    }
+    //---------------------------------------------
+    private void addItemsToRooms() {
+        // Add items to rooms as per requirements
+        theLine.addItem(new Food("a shiny brass lamp", "lamp", 0));
+        theLine.addItem(new MeleeWeapon("Rusty Sword", "sword"));
+
+        theStone.addItem(new Food("a healing potion", "potion", 20));
+        theStone.addItem(new RangedWeapon("Bow and Arrow", "bow", 5));
+
+        //--------------------------------------------- add more items to room if needed
+    }
+    public void attack(String enemy){
+
+    }
+    //---------------------------------------------
     public Room getStartingRoom() {
-        return startingRoom;
+        return theLine; // Starting point for the player
     }
 }

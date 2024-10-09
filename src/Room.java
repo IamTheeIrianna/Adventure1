@@ -3,99 +3,62 @@ import java.util.ArrayList;
 public class Room {
     private String name;
     private String description;
-
     private Room north;
-    private Room west;
     private Room east;
     private Room south;
-    private String shortName;
-    private String longName;
-    private ArrayList<Item> roomItems;
+    private Room west;
+    private ArrayList<Item> items;
     //---------------------------------------------
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
-        this.shortName = shortName;
-        this.longName = longName;
-        this.roomItems = new ArrayList<>();
+        items = new ArrayList<>();
     }
     //---------------------------------------------
-    // Setters
-    public void setNorth(Room north) {
-        this.north = north;
-    }
-
-    public void setEast(Room east) {
-        this.east = east;
-    }
-
-    public void setWest(Room west) {
-        this.west = west;
-    }
-
-    public void setSouth(Room south) {
-        this.south = south;
-    }
-
-    public void setLongName(String longName) {
-        this.longName = longName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-    //---------------------------------------------
-    // Getters
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-    //---------------------------------------------
-    public Room getEast() {
-        return east;
-    }
-
-    public Room getNorth() {
-        return north;
-    }
-
-    public Room getSouth() {
-        return south;
-    }
-
-    public Room getWest() {
-        return west;
-    }
-    //---------------------------------------------
-    public String getLongName() {
-        return longName;
-    }
-    public String getShortName() {
-        return shortName;
-    }
-    //--------------------------------------------- room items
-    //add room item
     public void addItem(Item item) {
-        roomItems.add(item);
-    }
-//remove room item //---------------------------------------------
-    public void removeItem(Item item) {
-        roomItems.remove(item);
-    }
-    //--------------------------------------------- current items
-    public ArrayList<Item> getItems() {
-        return roomItems;
+        items.add(item);
     }
     //---------------------------------------------
-    public Item findItem(String shortName) {
-        for (Item item : roomItems) {
-            if (item.getDescription().equalsIgnoreCase(shortName)) {
-                return item;
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
+    //---------------------------------------------
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+    //---------------------------------------------
+    public boolean hasItem(String shortName) {
+        for (Item item : items) {
+            if (item.getShortName().equalsIgnoreCase(shortName)) {
+                return true; // Item exists in the room
             }
         }
-        return null;
+        return false; // Item not found
     }
+    //---------------------------------------------
+    public String getDescription() {
+        return description; // Method to get room description
+    }
+
+    public String getName() {
+        return name; // Method to get room name
+    }
+    //---------------------------------------------
+    // Setters for room connections
+    public void setNorth(Room north) { this.north = north; }
+
+    public void setEast(Room east) { this.east = east; }
+
+    public void setSouth(Room south) { this.south = south; }
+
+    public void setWest(Room west) { this.west = west; }
+    //---------------------------------------------
+    // Getters for room connections
+    public Room getNorth() { return north; }
+
+    public Room getEast() { return east; }
+
+    public Room getSouth() { return south; }
+
+    public Room getWest() { return west; }
 }
