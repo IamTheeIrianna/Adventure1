@@ -46,5 +46,5 @@ public class Player {
     public void attack(Enemy enemy) {
         System.out.println("You've attacked" + enemy.getName() + "!");
         enemy.takeDamage(10); // Example damage value
-    }
+    }*/
 }

@@ -7,7 +7,7 @@ public class Adventure {
     private Map map;
     private UserInterface userInterface;
 
-    //----------------------------------------------
+    //---------------------------------------------
     // Constructor for  Adventure class
     public Adventure() {
         scanner = new Scanner(System.in);
