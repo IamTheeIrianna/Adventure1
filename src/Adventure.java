@@ -30,7 +30,16 @@ public class Adventure {
             for(Enemy enemy : player.getCurrentRoom().getEnemies()) {
                 if(enemy.getName().equalsIgnoreCase(enemyName)) {
                     targetEnemy = enemy;
+                    break;
                 }
+            }
+            System.out.println("Attack" + targetEnemy.getName() + "with the" + equippedWeapon.getLongName() + "!");
+            targetEnemy.takeDamage(equippedWeapon.getDamage());
+            if(targetEnemy.getHealth() > 0) {
+                targetEnemy.attack(player);
+            } else {
+                player.getCurrentRoom().removeEnemy(targetEnemy);
+                System.out.println(targetEnemy.getName() + "has been defeated!!!");
             }
         }
     }
@@ -159,6 +168,13 @@ public class Adventure {
         System.out.println(currentRoom.getName()); // Display the room name
         System.out.println(currentRoom.getDescription()); // Display the room description
         displayItemsInCurrentRoom(); // Display items in the current room
+
+        if(!currentRoom.getEnemies().isEmpty()) {
+            System.out.println("this room has an enemy!");
+            for(Enemy enemy : currentRoom.getEnemies()) {
+                System.out.println("- " + enemy.getName() + "health status: " + "("+ enemy.getHealth() + ")");
+            }
+        }
     }
     //----------------------------------------------
     // Method to display items in the current room
