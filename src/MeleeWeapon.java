@@ -1,9 +1,23 @@
 public class MeleeWeapon extends Weapon {
-
-    public MeleeWeapon(String longName, String shortName) { super(longName, shortName); }
+private int damamge;
+    public MeleeWeapon(String longName, String shortName, int damage) {
+        super(longName, shortName);
+        this.damage = damage;
+    }
 
     @Override
-    public int remainingUses() { return Integer.Max; } // Melee weapons can be used indefinitely
+    public int remainingUses() {
+        return Integer.MAX_VALUE;
+    } // Melee weapons can be used indefinitely
+@Override
+public boolean canUse() {
+        return true;
+}
+@Override
+public int getDamage() {
+        return damage;
+}
+    public void use() {
 
-    public void use() { /* No action needed for melee weapon usage */ }
+    }
 }

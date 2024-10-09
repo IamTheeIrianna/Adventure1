@@ -27,14 +27,22 @@ public class Adventure {
         }
         Enemy targetEnemy = null;
         if (enemyName != null && !enemyName.isEmpty()) {
+
             for(Enemy enemy : player.getCurrentRoom().getEnemies()) {
+
                 if(enemy.getName().equalsIgnoreCase(enemyName)) {
+
                     targetEnemy = enemy;
                     break;
                 }
             }
+            if (targetEnemy == null) {
+                System.out.println("there is no enemies in this room");
+                return;
+            }
             System.out.println("Attack" + targetEnemy.getName() + "with the" + equippedWeapon.getLongName() + "!");
             targetEnemy.takeDamage(equippedWeapon.getDamage());
+
             if(targetEnemy.getHealth() > 0) {
                 targetEnemy.attack(player);
             } else {
