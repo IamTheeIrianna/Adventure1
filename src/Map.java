@@ -23,30 +23,30 @@ public class Map {
     //---------------------------------------------
     //room location setters
     private void connectRooms() {
-        // Example: No room to the north of Room 1
+
         //map setting
-        theLine.setEast(theStone); // 'theLine' connects east to 'theStone'
-        theLine.setSouth(ironDome); // 'theLine' connects south to 'ironDome'
+        theLine.setEast(theStone);
+        theLine.setSouth(ironDome);
 
-        theStone.setWest(theLine); // 'theStone' connects west to 'theLine'
-        theStone.setEast(theBronze); // 'theStone' connects east to 'theBronze'
+        theStone.setWest(theLine);
+        theStone.setEast(theBronze);
 
-        theBronze.setWest(theStone); // 'theBronze' connects west to 'theStone'
-        theBronze.setSouth(eraOfEval); // 'theBronze' connects south to 'eraOfEval'
+        theBronze.setWest(theStone);
+        theBronze.setSouth(eraOfEval);
 
-        ironDome.setNorth(theLine); // 'ironDome' connects north to 'theLine'
-        ironDome.setSouth(theFall); // 'ironDome' connects south to 'theFall'
+        ironDome.setNorth(theLine);
+        ironDome.setSouth(theFall);
 
-        theFall.setSouth(renaissance); // 'theFall' connects south to 'renaissance'
+        theFall.setSouth(renaissance);
 
-        eraOfEval.setNorth(theBronze); // 'eraOfEval' connects north to 'theBronze'
-        eraOfEval.setSouth(theEntrapment); // 'eraOfEval' connects south to 'das'
+        eraOfEval.setNorth(theBronze);
+        eraOfEval.setSouth(theEntrapment);
 
-        theFall.setNorth(ironDome); // 'theFall' connects north to 'ironDome'
-        theFall.setEast(renaissance); // 'theFall' connects east to 'renaissance'
+        theFall.setNorth(ironDome);
+        theFall.setEast(renaissance);
 
-        renaissance.setWest(theFall); // 'renaissance' connects west to 'theFall'
-        renaissance.setNorth(theFall); // 'renaissance' connects north to 'theFall'
+        renaissance.setWest(theFall);
+        renaissance.setNorth(theFall);
 
         theEntrapment.setNorth(eraOfEval);
 

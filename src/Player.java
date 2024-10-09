@@ -41,6 +41,7 @@ public class Player {
         return null; // Not found
     }
     //----------------------------------------
+    /*
     // Attack method
     public void attack(Enemy enemy) {
         System.out.println("You've attacked" + enemy.getName() + "!");
