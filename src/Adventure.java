@@ -1,13 +1,16 @@
 import java.util.ArrayList;
 
 public class Adventure {
-    private Player player;
-    private UserInterface ui;
     private Map theCircle;
+    private Player player;
+
+    private UserInterface ui;
+
 
     public Adventure() {
         theCircle = new Map();
-        player = new Player(theCircle.getStartingRoom());
+        Room startingRoom = theCircle.getStartingRoom();
+        player = new Player(startingRoom);
         ui = new UserInterface(this);
     }
 

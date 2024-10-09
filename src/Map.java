@@ -5,7 +5,7 @@ public class Map {
         createRooms();
     }
 
-    public void createRooms() {
+    public Room createRooms() {
         Room theCityOfShadows = new Room("The city of shadows", "Here you are just a silhouette \nmade from particles of light");
         Room theWickedGate = new Room("The Wicked Gate", "In this relm you will find the cousins judgment and critisism");
         Room theSloughOfDespair = new Room("The Slough of despair", "Surrounded by your old conciousness");
@@ -45,17 +45,18 @@ public class Map {
         theValleyOfTheUnknown.setWest(vanityFair);
 
         // Add items to rooms
-        theCityOfShadows.addItem(new Item("feelings from the self", "Feelings"));
-        theWickedGate.addItem(new Item("Self accept", "Conformity"));
-        theSloughOfDespair.addItem(new Item("to be discovered", "dreams"));
-        theMountainOfSorrow.addItem(new Item("cross the mountain", "return to comfort"));
-        thePalace.addItem(new Item("wisdom", "knowledge"));
-        theValleyOfHumiliation.addItem(new Item("Humility", "Wrath"));
-        celestialCity.addItem(new Item("soul", "physical self"));
-        vanityFair.addItem(new Item("ego", "blindness"));
-        theValleyOfTheUnknown.addItem(new Item("currency", "Eternal supply of food"));
+        theCityOfShadows.addItem(new Item("D ", " DD"));
+        theWickedGate.addItem(new Item(" C", " CC"));
+        theSloughOfDespair.addItem(new Item(" B", "BB "));
+        theMountainOfSorrow.addItem(new Item("A ", " AA"));
+        thePalace.addItem(new Item("wisdom", " WW"));
+        theValleyOfHumiliation.addItem(new Item("E ", " EE"));
+        celestialCity.addItem(new Item("soul", "EE "));
+        vanityFair.addItem(new Item("ego", " EE"));
+        theValleyOfTheUnknown.addItem(new Item("currency", " GG"));
 
         startingRoom = theCityOfShadows;
+        return theCityOfShadows;
     }
 
     public Room getStartingRoom() {
