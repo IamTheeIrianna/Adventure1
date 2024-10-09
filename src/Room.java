@@ -8,11 +8,26 @@ public class Room {
     private Room south;
     private Room west;
     private ArrayList<Item> items;
+    private ArrayList<Enemy> enemies; //array list to hold enemies
     //---------------------------------------------
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
         items = new ArrayList<>();
+        enemies = new ArrayList<>(); //enemy list initializer
+    }
+    //---------------------------------------------
+    //add enemy to room method
+    public void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
+    }
+    //---------------------------------------------
+     public void removeEnemy(Enemy enemy) {
+        enemies.remove(enemy);
+    }
+    //---------------------------------------------
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
     }
     //---------------------------------------------
     public void addItem(Item item) {

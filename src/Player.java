@@ -5,6 +5,7 @@ public class Player {
     private Room currentRoom;
     private ArrayList<Item> inventory;
     private int health;
+    private Weapon equippedWeapon;
     //---------------------------------------------
     public Player(Room startingRoom) {
         this.currentRoom = startingRoom;
@@ -12,6 +13,22 @@ public class Player {
         //---------------------------------------------
         this.health = 100; // Example starting health
     }
+    //---------------------------------------------
+    public void takeDamage(int damage) {
+        if (health <= 0) {
+            System.out.println("D.E.F.E.A.T.E.D.");
+        } else {
+            System.out.println("your health is now" + health);
+        }
+    }
+    //---------------------------------------------
+    public void setEquippedWeapon(Weapon weapon) {
+        this.equippedWeapon = weapon;
+    }
+    //---------------------------------------------
+public Weapon getEquippedWeapon(){
+        return equippedWeapon;
+}
     //---------------------------------------------
     public Room getCurrentRoom() {
         return currentRoom;

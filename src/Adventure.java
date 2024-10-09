@@ -18,6 +18,22 @@ public class Adventure {
     }
 
     //----------------------------------------------
+    private void attack(String enemyName) {
+        Weapon equippedWeapon = player.getEquippedWeapon();
+
+        if(equippedWeapon == null) {
+            System.out.println("Equip weapon from inventory or move to retrospecitve room");
+            return;
+        }
+        Enemy targetEnemy = null;
+        if (enemyName != null && !enemyName.isEmpty()) {
+            for(Enemy enemy : player.getCurrentRoom().getEnemies()) {
+                if(enemy.getName().equalsIgnoreCase(enemyName)) {
+                    targetEnemy = enemy;
+                }
+            }
+        }
+    }
 
     // Method to display the welcome message
     private void welcomeMessage() {
