@@ -6,7 +6,7 @@ public class UserInterface {
     public UserInterface(Adventure adventure) {
         this.adventure = adventure;
     }
-
+    //---------------------------------------------
     public void start() {
         System.out.println("\nWelcome to the adventure game!");
         System.out.println("In this game you will be navigating through 9 different realms");
@@ -52,21 +52,21 @@ public class UserInterface {
 
         scanner.close();
     }
-
+    //---------------------------------------------
     private void printRoomItems() {
         System.out.println("\nCurrent room items:");
         for (Item item : adventure.getCurrentRoomItems()) {
             System.out.println("- " + item.getShortName());
         }
     }
-
+    //---------------------------------------------
     private void printInventory() {
         System.out.println("Your current inventory:");
         for (Item item : adventure.getPlayerInventory()) {
             System.out.println("- " + item.getLongName());
         }
     }
-
+    //---------------------------------------------
     public void printHelp() {
         System.out.println("Available commands:");
         System.out.println("start - Begin the game");

@@ -4,16 +4,17 @@ public class Player {
     private Room currentRoom;
     private ArrayList<Item> inventory;
     private int health;
-
+//---------------------------------------------
     public Player(Room startingRoom) {
         this.currentRoom = startingRoom;
         this.inventory = new ArrayList<>();
+        this.health = 100;
     }
-
+    //---------------------------------------------
     public Room getCurrentRoom() {
         return currentRoom;
     }
-
+    //---------------------------------------------
     public void move(String direction) {
         Room nextRoom = null;
 
@@ -43,19 +44,19 @@ public class Player {
             System.out.println("The path you have chosen is unavailable");
         }
     }
-
+    //---------------------------------------------
     public void addItem(Item item) {
         inventory.add(item);
     }
-
+    //---------------------------------------------
     public void removeItem(Item item) {
         inventory.remove(item);
     }
-
+    //---------------------------------------------
     public ArrayList<Item> getInventory() {
         return inventory;
     }
-
+    //---------------------------------------------
     public Item findItem(String shortName) {
         for (Item item : inventory) {
             if (item.getDescription().equalsIgnoreCase(shortName)) {
@@ -64,7 +65,7 @@ public class Player {
         }
         return null;
     }
-
+    //---------------------------------------------
     public void takeItem(String shortName) {
         Item item = currentRoom.findItem(shortName);
         if (item != null) {
@@ -76,7 +77,7 @@ public class Player {
             System.out.println("There is no such " + shortName + " object here");
         }
     }
-
+    //---------------------------------------------
     public void dropItem(String shortName) {
         Item item = findItem(shortName);
         if (item != null) {

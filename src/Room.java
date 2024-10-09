@@ -11,7 +11,7 @@ public class Room {
     private String shortName;
     private String longName;
     private ArrayList<Item> roomItems;
-
+    //---------------------------------------------
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
@@ -19,7 +19,7 @@ public class Room {
         this.longName = longName;
         this.roomItems = new ArrayList<>();
     }
-
+    //---------------------------------------------
     // Setters
     public void setNorth(Room north) {
         this.north = north;
@@ -44,7 +44,7 @@ public class Room {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
-
+    //---------------------------------------------
     // Getters
     public String getName() {
         return name;
@@ -53,7 +53,7 @@ public class Room {
     public String getDescription() {
         return description;
     }
-
+    //---------------------------------------------
     public Room getEast() {
         return east;
     }
@@ -69,26 +69,27 @@ public class Room {
     public Room getWest() {
         return west;
     }
-
+    //---------------------------------------------
     public String getLongName() {
         return longName;
     }
     public String getShortName() {
         return shortName;
     }
-
+    //--------------------------------------------- room items
+    //add room item
     public void addItem(Item item) {
         roomItems.add(item);
     }
-
+//remove room item //---------------------------------------------
     public void removeItem(Item item) {
         roomItems.remove(item);
     }
-
+    //--------------------------------------------- current items
     public ArrayList<Item> getItems() {
         return roomItems;
     }
-
+    //---------------------------------------------
     public Item findItem(String shortName) {
         for (Item item : roomItems) {
             if (item.getDescription().equalsIgnoreCase(shortName)) {
