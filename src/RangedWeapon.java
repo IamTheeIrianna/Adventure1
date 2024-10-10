@@ -1,5 +1,4 @@
 public class RangedWeapon extends Weapon {
-
     private int uses;
     private int damage;
 
@@ -13,36 +12,38 @@ public class RangedWeapon extends Weapon {
         return uses;
     }
     @Override
+    public boolean canUse() {
+        return uses > 0;
+    }
+    @Override
     public int getDamage() {
     return damage;
     }
-    public void use () {
-        if (canUse()){
-            uses --;
-            System.out.println();
-        }
-    }
-}
-
     @Override
-    public boolean canUse(){
-        return uses > 0;
-
-    } if(uses > 0) uses--;
-     System.out.println("This weapon can no longer be used"); {
-
-    }
-    public void use(){
-
-        if(canUse()) {
-            uses--;
-            System.out.println("fire your " + getLongName() + "!");{
-
-            } else if  (uses > 0) uses--; {
-            else System.out.println("This weapon can no longer be used");
-
+    public void use () {
+        if (canUse()) {
+            uses --;
+            System.out.println("fire your" + getLongName() + "!");
         } else {
-            System.out.println("you have now more ammunition");
+            System.out.println("you have now more ammunition in" + getLongName() + "!");
+
+
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

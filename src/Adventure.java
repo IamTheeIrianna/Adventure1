@@ -41,6 +41,7 @@ public class Adventure {
                 return;
             }
             System.out.println("Attack" + targetEnemy.getName() + "with the" + equippedWeapon.getLongName() + "!");
+
             targetEnemy.takeDamage(equippedWeapon.getDamage());
 
             if(targetEnemy.getHealth() > 0) {
