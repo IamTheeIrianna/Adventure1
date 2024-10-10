@@ -5,18 +5,32 @@ public class Adventure {
     private Scanner scanner;
     private Player player;
     private Map map;
-    private UserInterface userInterface;
+
 
     //---------------------------------------------
     // Constructor for  Adventure class
     public Adventure() {
         scanner = new Scanner(System.in);
-        Map gameMap = new Map();          // map ovject creation
-        player = new Player(gameMap.getStartingRoom()); // Initialize the player in start room
-
+        Map Map = new Map();          // map ovject creation
+        player = new Player(map.getStartingRoom()); // Initialize the player in start room
         welcomeMessage(); // Display the welcome message
-    }
 
+    }
+    // Method to display the welcome message
+    private void welcomeMessage() {
+        System.out.println("\nWelcome to the adventure game!");
+        System.out.println("In this game you will be navigating through 9 different locations");
+        System.out.println("\nUse the following commands to navigate between rooms:\n- north \n- east \n- south \n- west.");
+        System.out.println("Abbreviations:" + "\n[" + "n,e,s,w" + "]");
+        System.out.println("- 'look' or 'look around' for placement description. \n- 'help' for instructions. \n- 'exit' to leave the game.");
+        System.out.println("inventory / inv / invent - Show your inventory");
+        System.out.println("health - Show your current health status");
+        System.out.println("take <item> - Take an item");
+        System.out.println(getDrop() + " <item> - Drop an item");
+        System.out.println("eat <food> - Eat a food item");
+        System.out.println("attack - Attack the enemy in the room");
+        System.out.println("\nEnter [start] to start the game.");
+    }
     //----------------------------------------------
     private void attack(String enemyName) {
         Weapon equippedWeapon = player.getEquippedWeapon();
@@ -53,21 +67,7 @@ public class Adventure {
         }
     }
 
-    // Method to display the welcome message
-    private void welcomeMessage() {
-        System.out.println("\nWelcome to the adventure game!");
-        System.out.println("In this game you will be navigating through 9 different locations");
-        System.out.println("\nUse the following commands to navigate between rooms:\n- north \n- east \n- south \n- west.");
-        System.out.println("Abbreviations:" + "\n[" + "n,e,s,w" + "]");
-        System.out.println("- 'look' or 'look around' for placement description. \n- 'help' for instructions. \n- 'exit' to leave the game.");
-        System.out.println("inventory / inv / invent - Show your inventory");
-        System.out.println("health - Show your current health status");
-        System.out.println("take <item> - Take an item");
-        System.out.println(getDrop() + " <item> - Drop an item");
-        System.out.println("eat <food> - Eat a food item");
-        System.out.println("attack - Attack the enemy in the room");
-        System.out.println("\nEnter [start] to start the game.");
-    }
+
 
     private static String getDrop() { //item drop
         return "drop";
@@ -96,7 +96,17 @@ public class Adventure {
 
             if (input.equals("exit")) {
                 System.out.println("Thank you for playing");
-                break; // Exit game loop
+                break;// Exit game loop
+            } else if (input.equals("attack")) {// Attack command
+                attack(null);
+            } else if (input.startsWith("attack ")) {
+                attack(input.substring(7));
+            }
+                player.attack(currentEnemy); // Attack current enemy
+                if (currentEnemy.getHealth() <= 0) {
+                    System.out.println(currentEnemy.getName() + " has been defeated!");
+                    break; // End combat if enemy is defeated
+                }
                 //---------------------------------------------
             } else if (input.equalsIgnoreCase("look") || input.equalsIgnoreCase("look around")) {
                 displayCurrentRoom(); // Display the current room details
@@ -119,12 +129,7 @@ public class Adventure {
             } else if (input.startsWith("eat ")) {
                 eatFood(input.substring(4)); // Eat a food item
                 //----------------------------------------------
-           /* } else if (input.equals("attack")) { // Attack command
-                player.attack(currentEnemy); // Attack current enemy
-                if (currentEnemy.getHealth() <= 0) {
-                    System.out.println(currentEnemy.getName() + " has been defeated!");
-                    break; // End combat if enemy is defeated
-                } */
+           /*  */
                 //----------------------------------------------
 //--------------------------------------------- move to player class maybe? or UI
             } else if (input.startsWith("go ")) {
@@ -265,7 +270,7 @@ public class Adventure {
     // Method to navigate to a different room
     //move to player class //---------------------------------------------
     private void navigate(String direction) {
-        Room nextRoom = null;
+        Room nextRoom;
 
         switch (direction) {
             case "north":
