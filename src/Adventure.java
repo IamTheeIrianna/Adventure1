@@ -16,7 +16,7 @@ public class Adventure {
     // Method to display the welcome message
     private void welcomeMessage() {
         System.out.println("\nWelcome to the adventure game!");
-        System.out.println("In this game you will be navigating through 9 different locations");
+        System.out.println("In this game you will be navigating through 9 different dimensions");
         System.out.println("\nUse the following commands to navigate between rooms:\n- north \n- east \n- south \n- west.");
         System.out.println("Abbreviations:" + "\n[" + "n,e,s,w" + "]");
         System.out.println("- 'look' or 'look around' for placement description. \n- 'help' for instructions. \n- 'exit' to leave the game.");
@@ -25,6 +25,7 @@ public class Adventure {
         System.out.println("take <item> - Take an item");
         System.out.println(getDrop() + " <item> - Drop an item");
         System.out.println("eat <food> - Eat a food item");
+        System.out.println("equip + weapon name - to equip weapon");
         System.out.println("attack - Attack the enemy in the room");
         System.out.println("\nEnter [start] to start the game.");
     }
@@ -51,9 +52,18 @@ public class Adventure {
             if (input.equals("exit")) {
                 System.out.println("Thank you for playing");
                 break;// Exit game loop
+                //----------------------------------------------
+            } else if (input.startsWith("equip ")) { // Equip command
+                String weaponName = input.substring(6);
+                Item itemToEquip = player.findItem(weaponName); // Find item in inventory
 
-            } else if (input.equals("attack")) {// Attack command
-                attack(null);
+                if (itemToEquip instanceof Weapon) { // Check if it's a Weapon
+                    player.equipWeapon((Weapon) itemToEquip);
+                } else {
+                    System.out.println("You can't equip that item.");
+                }
+                //----------------------------------------------
+
 
             } else if (input.startsWith("attack ")) {
                 attack(input.substring(7));
@@ -84,16 +94,16 @@ public class Adventure {
                 // ----------------------------------------------
         } else if (input.length() == 1) {
             switch (input.toLowerCase()) {
-                case "n":
+                case "n", "go north", "NORTH", "GO NORTH":
                     navigate("north");
                     break;
-                case "s":
+                case "s", "go south", "SOUTH", "GO SOUTH":
                     navigate("south");
                     break;
-                case "e":
+                case "e","go east", "EAST", "GO EAST":
                     navigate("east");
                     break;
-                case "w":
+                case "w", "go west", "WEST", "GO WEST":
                     navigate("west");
                     break;
                 default:
@@ -140,6 +150,10 @@ public class Adventure {
                 player.getCurrentRoom().removeEnemy(targetEnemy);
                 System.out.println(targetEnemy.getName() + "has been defeated!!!");
             }
+        } else {
+            System.out.println("you've attacked the air with " + equippedWeapon.getLongName() + "!");
+            equippedWeapon.use();
+
         }
     }
     //----------------------------------------------
@@ -155,7 +169,7 @@ public class Adventure {
         if(!currentRoom.getEnemies().isEmpty()) {
             System.out.println("this room has an enemy!");
             for(Enemy enemy : currentRoom.getEnemies()) {
-                System.out.println("- " + enemy.getName() + "health status: " + "("+ enemy.getHealth() + ")");
+                System.out.println("- " + enemy.getName() + "health status: " + "("+ enemy.getHealth() + " )");
             }
         } else {
             System.out.println("There are no enemies here... Luckily...");
@@ -170,7 +184,7 @@ public class Adventure {
         ArrayList<Item> items = player.getCurrentRoom().getItems(); // Get items in the current room
 
         if (items.isEmpty()) {
-            System.out.println("There are no items here."); // No items in the room
+            System.out.println("There are no items here. "); // No items in the room
 
         } else {
             System.out.println("Items in this room: ");
@@ -186,7 +200,7 @@ public class Adventure {
         if (inventory.isEmpty()) {
             System.out.println("Your inventory is empty.");
         } else {
-            System.out.println("Your inventory:");
+            System.out.println("Your inventory: ");
             for (Item item : inventory) {
                 System.out.println("- " + item.getLongName()); // Display each item's long name. change to include short name?
             }
@@ -276,7 +290,8 @@ public class Adventure {
         System.out.println("- 'drop <item>': Drop an item from your inventory into the room.");
         System.out.println("- 'eat <food>': Eat a food item from your inventory.");
         System.out.println("- 'attack': Attack the enemy in the room.");
-        System.out.println("- Navigate using: north, south, east, west or their abbreviations n, s, e, w.");
+        System.out.println("equip + weapon name - to equip weapon");
+        System.out.println("- Navigate using: north, south, east, west \nor their abbreviations n, s, e, w.");
         System.out.println("------------------\n");
     }
 }

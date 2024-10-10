@@ -21,32 +21,45 @@ public class Player {
         }
     }
     //---------------------------------------------
-    public void setEquippedWeapon(Weapon weapon) {
-        this.equippedWeapon = weapon;
+    public void equipWeapon(Weapon weapon) {
+        if(inventory.contains(weapon)) {
+            this.equippedWeapon = weapon;
+            System.out.println("The weapon is not in your inventory");
+        }
     }
     //---------------------------------------------
-public Weapon getEquippedWeapon(){
+    public Weapon getEquippedWeapon(){
         return equippedWeapon;
-}
+    }
     //---------------------------------------------
     public Room getCurrentRoom() {
         return currentRoom;
     }
     //---------------------------------------------
-    public void setCurrentRoom(Room currentRoom) { this.currentRoom = currentRoom; }
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
     //---------------------------------------------
-    public ArrayList<Item> getInventory() { return inventory; }
+    public ArrayList<Item> getInventory() {
+        return inventory;
+    }
     //---------------------------------------------
-    public int getHealth() { return health; }
+    public int getHealth() {
+        return health;
+    }
     //---------------------------------------------
     public void eat(Food food) {
         health += food.getHealthPoints();
         System.out.println("Your health is now: " + health);
     }
     //---------------------------------------------
-    public void addItem(Item item) { inventory.add(item); }
+    public void addItem(Item item) {
+        inventory.add(item);
+    }
 
-    public void removeItem(Item item) { inventory.remove(item); }
+    public void removeItem(Item item) {
+        inventory.remove(item);
+    }
 
     public Item findItem(String itemName) {
         for (Item item : inventory) {
