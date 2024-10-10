@@ -4,11 +4,12 @@ import java.util.Scanner;
 public class Adventure {
     private final Scanner scanner;
     private final Player player;
-    private Map map;
+
     //---------------------------------------------
     // Constructor for  Adventure class
     public Adventure() {
         scanner = new Scanner(System.in);
+        Map map = new Map();
         player = new Player(map.getStartingRoom()); // Initialize the player in start room
         welcomeMessage(); // Display the welcome message
     }
