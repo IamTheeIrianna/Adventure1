@@ -2,19 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Adventure {
-    private Scanner scanner;
-    private Player player;
+    private final Scanner scanner;
+    private final Player player;
     private Map map;
-
-
     //---------------------------------------------
     // Constructor for  Adventure class
     public Adventure() {
         scanner = new Scanner(System.in);
-        Map Map = new Map();          // map ovject creation
         player = new Player(map.getStartingRoom()); // Initialize the player in start room
         welcomeMessage(); // Display the welcome message
-
     }
     // Method to display the welcome message
     private void welcomeMessage() {
@@ -32,20 +28,98 @@ public class Adventure {
         System.out.println("\nEnter [start] to start the game.");
     }
     //----------------------------------------------
+    // Method to start the game
+    public void startGame() {
+        String input = scanner.nextLine(); // user input reader
+
+        if (input.equalsIgnoreCase("start")) {
+            displayCurrentRoom(); // current room details display
+//----------------------------------------------
+            gameLoop(); // game loop start
+            //----------------------------------------------
+        } else {
+            System.out.println("Invalid command. Please type 'start' to begin.");
+            startGame(); // Prompt to start if incorrent input
+        }
+    }
+    // Main game loop for game logic execution
+    private void gameLoop() {
+        while (true) {
+            String input = scanner.nextLine(); // user input
+
+            if (input.equals("exit")) {
+                System.out.println("Thank you for playing");
+                break;// Exit game loop
+
+            } else if (input.equals("attack")) {// Attack command
+                attack(null);
+
+            } else if (input.startsWith("attack ")) {
+                attack(input.substring(7));
+
+            } else if (input.equalsIgnoreCase("look") || input.equalsIgnoreCase("look around")) {
+            displayCurrentRoom(); // Display the current room details
+                // ---------------------------------------------
+        } else if (input.equalsIgnoreCase("help")) {
+            displayHelpMessage(); // Display 'help' message
+            //---------------------------------------------
+        } else if (input.startsWith("take ")) {
+            takeItem(input.substring(5)); // Take an item from the room
+            //---------------------------------------------
+        } else if (input.startsWith("drop ")) {
+            dropItem(input.substring(5)); // Drop an item from the inventory
+            //---------------------------------------------
+        } else if (input.equals("inventory") || input.equals("inv") || input.equals("inven")) {
+            showInventory(); // Show player inventory
+            //---------------------------------------------
+        } else if (input.equals("health")) {
+            showHealth(); // Show player health
+            //---------------------------------------------
+        } else if (input.startsWith("eat ")) {
+            eatFood(input.substring(4)); // Eat a food item
+            //----------------------------------------------
+        } else if (input.startsWith("go ")) {
+            navigate(input.substring(3).toLowerCase()); // Navigate to a different room
+                // ----------------------------------------------
+        } else if (input.length() == 1) {
+            switch (input.toLowerCase()) {
+                case "n":
+                    navigate("north");
+                    break;
+                case "s":
+                    navigate("south");
+                    break;
+                case "e":
+                    navigate("east");
+                    break;
+                case "w":
+                    navigate("west");
+                    break;
+                default:
+                    System.out.println("Invalid command. Type 'help' for options.");
+            }
+        } else {
+            System.out.println("Invalid command. Type 'help' for options.");
+        }
+    }
+        scanner.close();
+}
+    //----------------------------------------------
     private void attack(String enemyName) {
         Weapon equippedWeapon = player.getEquippedWeapon();
-
+        //----------------------------------------------
         if(equippedWeapon == null) {
             System.out.println("Equip weapon from inventory or move to retrospecitve room");
             return;
+            //----------------------------------------------
         }
         Enemy targetEnemy = null;
+
         if (enemyName != null && !enemyName.isEmpty()) {
 
             for(Enemy enemy : player.getCurrentRoom().getEnemies()) {
 
                 if(enemy.getName().equalsIgnoreCase(enemyName)) {
-
                     targetEnemy = enemy;
                     break;
                 }
@@ -55,154 +129,72 @@ public class Adventure {
                 return;
             }
             System.out.println("Attack" + targetEnemy.getName() + "with the" + equippedWeapon.getLongName() + "!");
-
             targetEnemy.takeDamage(equippedWeapon.getDamage());
 
+            //----------------------------------------------
             if(targetEnemy.getHealth() > 0) {
                 targetEnemy.attack(player);
+//----------------------------------------------
             } else {
                 player.getCurrentRoom().removeEnemy(targetEnemy);
                 System.out.println(targetEnemy.getName() + "has been defeated!!!");
             }
         }
     }
-
-
-
+    //----------------------------------------------
     private static String getDrop() { //item drop
         return "drop";
     }
-
     //----------------------------------------------
-
-    // Method to start the game
-    public void startGame() {
-        String input = scanner.nextLine(); // user input reader
-
-        if (input.equalsIgnoreCase("start")) {
-            displayCurrentRoom(); // current room details display
-            gameLoop(); // game loop start
-        } else {
-            System.out.println("Invalid command. Please type 'start' to begin.");
-            startGame(); // Prompt to start if incorrent input
-        }
-    }
-    //----------------------------------------------
-
-    // Main game loop for game logic execution
-    private void gameLoop() {
-        while (true) {
-            String input = scanner.nextLine(); // user input
-
-            if (input.equals("exit")) {
-                System.out.println("Thank you for playing");
-                break;// Exit game loop
-            } else if (input.equals("attack")) {// Attack command
-                attack(null);
-            } else if (input.startsWith("attack ")) {
-                attack(input.substring(7));
-            }
-                player.attack(currentEnemy); // Attack current enemy
-                if (currentEnemy.getHealth() <= 0) {
-                    System.out.println(currentEnemy.getName() + " has been defeated!");
-                    break; // End combat if enemy is defeated
-                }
-                //---------------------------------------------
-            } else if (input.equalsIgnoreCase("look") || input.equalsIgnoreCase("look around")) {
-                displayCurrentRoom(); // Display the current room details
-                //---------------------------------------------
-            } else if (input.equalsIgnoreCase("help")) {
-                displayHelpMessage(); // Display 'help' message
-                //---------------------------------------------
-            } else if (input.startsWith("take ")) {
-                takeItem(input.substring(5)); // Take an item from the room
-                //---------------------------------------------
-            } else if (input.startsWith("drop ")) {
-                dropItem(input.substring(5)); // Drop an item from the inventory
-                //---------------------------------------------
-            } else if (input.equals("inventory") || input.equals("inv") || input.equals("invent")) {
-                showInventory(); // Show player inventory
-                //---------------------------------------------
-            } else if (input.equals("health")) {
-                showHealth(); // Show player health
-                //---------------------------------------------
-            } else if (input.startsWith("eat ")) {
-                eatFood(input.substring(4)); // Eat a food item
-                //----------------------------------------------
-           /*  */
-                //----------------------------------------------
-//--------------------------------------------- move to player class maybe? or UI
-            } else if (input.startsWith("go ")) {
-                navigate(input.substring(3).toLowerCase()); // Navigate to a different room
-            } else if (input.length() == 1) {
-                switch (input.toLowerCase()) {
-                    case "n":
-                        navigate("north");
-                        break;
-                    case "s":
-                        navigate("south");
-                        break;
-                    case "e":
-                        navigate("east");
-                        break;
-                    case "w":
-                        navigate("west");
-                        break;
-                    default:
-                        System.out.println("Invalid command. Type 'help' for options.");
-                }
-            } else {
-                System.out.println("Invalid command. Type 'help' for options.");
-            }
-        }
-        scanner.close();
-    }
-    //----------------------------------------------
-    // move to UI class //---------------------------------------------
-    // Method to display the help message
-    private void displayHelpMessage() {
-        System.out.println("\n--- Help Menu ---");
-        System.out.println("- 'look' or 'look around': Display your current room's details.");
-        System.out.println("- 'help': Show this help message.");
-        System.out.println("- 'exit': Exit the game.");
-        System.out.println("- 'inventory', 'inv', or 'invent': Show your inventory.");
-        System.out.println("- 'health': Show your current health status.");
-        System.out.println("- 'take <item>': Take an item from the room.");
-        System.out.println("- 'drop <item>': Drop an item from your inventory into the room.");
-        System.out.println("- 'eat <food>': Eat a food item from your inventory.");
-        System.out.println("- 'attack': Attack the enemy in the room.");
-        System.out.println("- Navigate using: north, south, east, west or their abbreviations n, s, e, w.");
-        System.out.println("------------------\n");
-    }
-    //----------------------------------------------
-    // Method to display the current room details
-    // move to UI
     private void displayCurrentRoom() {
         Room currentRoom = player.getCurrentRoom(); // Get the current room of the player
         System.out.println(currentRoom.getName()); // Display the room name
         System.out.println(currentRoom.getDescription()); // Display the room description
-        displayItemsInCurrentRoom(); // Display items in the current room
-
+//----------------------------------------------
         if(!currentRoom.getEnemies().isEmpty()) {
             System.out.println("this room has an enemy!");
             for(Enemy enemy : currentRoom.getEnemies()) {
                 System.out.println("- " + enemy.getName() + "health status: " + "("+ enemy.getHealth() + ")");
             }
+        } else {
+            System.out.println("There are no enemies here... Luckily...");
         }
+        //----------------------------------------------
+        displayItemsInCurrentRoom(); // Display items in the current room
     }
     //----------------------------------------------
     // Method to display items in the current room
     //move to UI?
     private void displayItemsInCurrentRoom() {
         ArrayList<Item> items = player.getCurrentRoom().getItems(); // Get items in the current room
+
         if (items.isEmpty()) {
             System.out.println("There are no items here."); // No items in the room
+
         } else {
-            System.out.println("Items in this room:");
+            System.out.println("Items in this room: ");
             for (Item item : items) {
                 System.out.println("- " + item.getLongName()); // Display each item's long name
             }
         }
+    }
+    //----------------------------------------------
+    // Method to show inventory
+    private void showInventory() {
+        ArrayList<Item> inventory = player.getInventory(); // Get player's inventory
+        if (inventory.isEmpty()) {
+            System.out.println("Your inventory is empty.");
+        } else {
+            System.out.println("Your inventory:");
+            for (Item item : inventory) {
+                System.out.println("- " + item.getLongName()); // Display each item's long name. change to include short name?
+            }
+        }
+    }
+    //----------------------------------------------
+    // Method to show health
+    private void showHealth() {
+        System.out.println("Your health is: " + player.getHealth()); // Display player's health
     }
     //----------------------------------------------
     // Method to take an item from the room
@@ -231,25 +223,7 @@ public class Adventure {
         }
     }
     //----------------------------------------------
-    // Method to show inventory
-    private void showInventory() {
-        ArrayList<Item> inventory = player.getInventory(); // Get player's inventory
-        if (inventory.isEmpty()) {
-            System.out.println("Your inventory is empty.");
-        } else {
-            System.out.println("Your inventory:");
-            for (Item item : inventory) {
-                System.out.println("- " + item.getLongName()); // Display each item's long name. change to include short name?
-            }
-        }
-    }
-    //----------------------------------------------
-    // Method to show health
-    private void showHealth() {
-        System.out.println("Your health is: " + player.getHealth()); // Display player's health
-    }
-    //----------------------------------------------
-    // Method to eat a food item
+    // Method to eat food
     private void eatFood(String foodName) {
         Item food = player.findItem(foodName); // Find food item in inventory
         if (food instanceof Food) {
@@ -260,18 +234,10 @@ public class Adventure {
             System.out.println("You can't eat that."); // Item is not food
         }
     }
-
-    //---------------------------------------------
-   /* Enemy currentEnemy = new Enemy("Goblin", 30); // Example enemy for demonstration
-    //----------------------------------------------
-
-    */
-
     // Method to navigate to a different room
     //move to player class //---------------------------------------------
     private void navigate(String direction) {
         Room nextRoom;
-
         switch (direction) {
             case "north":
                 nextRoom = player.getCurrentRoom().getNorth(); // Get the room to the north
@@ -289,12 +255,27 @@ public class Adventure {
                 System.out.println("Invalid direction."); // Invalid direction
                 return;
         }
-
         if (nextRoom != null) {
             player.setCurrentRoom(nextRoom); // Set the player's current room to the next room
             displayCurrentRoom(); // Show new room descript after new nav
         } else {
             System.out.println("You can't go that way."); // No room in the specified direction
         }
+    }
+    // move to UI class //---------------------------------------------
+    // Method to display the help message
+    private void displayHelpMessage() {
+        System.out.println("\n--- Help Menu ---");
+        System.out.println("- 'look' or 'look around': Display your current room's details.");
+        System.out.println("- 'help': Show this help message.");
+        System.out.println("- 'exit': Exit the game.");
+        System.out.println("- 'inventory', 'inv', or 'invent': Show your inventory.");
+        System.out.println("- 'health': Show your current health status.");
+        System.out.println("- 'take <item>': Take an item from the room.");
+        System.out.println("- 'drop <item>': Drop an item from your inventory into the room.");
+        System.out.println("- 'eat <food>': Eat a food item from your inventory.");
+        System.out.println("- 'attack': Attack the enemy in the room.");
+        System.out.println("- Navigate using: north, south, east, west or their abbreviations n, s, e, w.");
+        System.out.println("------------------\n");
     }
 }
