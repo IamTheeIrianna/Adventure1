@@ -1,5 +1,6 @@
 public class MeleeWeapon extends Weapon {
-private int damage;
+private final int damage;
+
     public MeleeWeapon(String longName, String shortName, int damage) {
         super(longName, shortName);
         this.damage = damage;
