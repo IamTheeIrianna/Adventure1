@@ -6,19 +6,20 @@ public class Map {
         createRooms();
         connectRooms();
         addItemsToRooms();
+        addEnemiesToRooms();
     }
     //---------------------------------------------
 //room creation
     private void createRooms() {
-      theLine = new Room("The line of existence", "\nA dark space,a sky surrounded by endless reflections & whispers of a past. \nAhead of you is nothing but an infinite luminous line");
-      theShadow = new Room("The dimension of shadows", "\nYou are in the DOS dimension. A place, in the dark, where light and dark dance in an eternal struggle. luminous lines begin to attatch, \nforming luminous floating geometric shapes");
-      theDream = new Room("The dream tree", "\nParticles of light, in the dark, have multiplied into a dark luminous tree dimensional forest");
-      time = new Room("Time", "\nA fluid landscape where past, present, and future intertwine. \nHere, few have escaped. The only escape is to travel through or to travel backwards into the macrocosmos.");
-      industrialChaos = new Room("The dimension of chaos", "\nAn unpredictable realm where order is a fleeting concept. A smoke-filled landscape dominated by machinery where progress \ncomes at a cost, changing nature as we know it.");
-      theFall = new Room("The fall", "\nA field of tragedies, overpopulated by universes that hold infectious particles within their microcosm");
-      ageOfEnlightenment = new Room("The Age of enlightenment", "\nHere, in the new world, as above, so below. A landscape filled with libraries and gardens, knowledge reinvents the wheel. ");
-      digitalFrontier = new Room("The Digital Frontier", "\nAn expansive digital landscape filled with neon lights, \ncode streams, and virtual constructs.");
-      theCosmicAge = new Room("The Cosmic age", "\nThe dimension of emotions. \nAn ethereal realm where emotion manifests as tangible forces. \nFilled with stars, nebulae, and cosmic phenomena, \nwhere time bends and reality shifts.");
+      theLine = new Room("\nThe line of existence", "A dark space,a sky surrounded by endless reflections & whispers of a past. \nAhead of you is nothing but an infinite luminous line");
+      theShadow = new Room("\nThe dimension of shadows", "You are in the DOS dimension. \nA place, in the dark, where light and dark dance in an eternal struggle. \nluminous lines begin to attatch, \nforming luminous floating geometric shapes");
+      theDream = new Room("\nThe dream tree", "Particles of light, in the dark, \nhave multiplied into a dark luminous tree dimensional forest");
+      time = new Room("\nTime", "A fluid landscape where past, present, and future intertwine. \nHere, few have escaped. \nThe only escape is to travel through or to travel backwards into the macrocosmos.");
+      industrialChaos = new Room("\nThe dimension of chaos", "An unpredictable realm where order is a fleeting concept. \nA smoke-filled landscape dominated by machinery where progress \ncomes at a cost, changing nature as we know it.");
+      theFall = new Room("\nThe fall", "A field of tragedies, overpopulated by universes that hold infectious particles within their microcosm");
+      ageOfEnlightenment = new Room("\nThe Age of enlightenment", "Here, in the new world, as above, so below. \nA landscape filled with libraries and gardens, knowledge reinvents the wheel. ");
+      digitalFrontier = new Room("\nThe Digital Frontier", "An expansive digital landscape filled with neon lights, \ncode streams, and virtual constructs.");
+      theCosmicAge = new Room("\nThe Cosmic age", "The dimension of emotions. \nAn ethereal realm where emotion manifests as tangible forces. \nFilled with stars, nebulae, and cosmic phenomena,\nwhere time bends and reality shifts.");
     }
     //---------------------------------------------
     //room location setters
@@ -57,11 +58,25 @@ public class Map {
     //---------------------------------------------
     private void addItemsToRooms() {
         // Add items to rooms as per requirements
-        theLine.addItem(new Food("a shiny brass lamp", "lamp", 0));
+        theDream.addItem(new Item(" ", " "));
+        ageOfEnlightenment.addItem(new Item(" ", " "));
+
+        theLine.addItem(new Item("a shiny brass lamp", "lamp"));
         theLine.addItem(new MeleeWeapon("Rusty Sword", "sword", 5));
 
         theShadow.addItem(new Food("a healing potion", "potion", 20));
-        theShadow.addItem(new RangedWeapon("Bow and Arrow", "bow", 5,10));
+        theShadow.addItem(new RangedWeapon("Bow and Arrow", "bow", 5, 10));
+        theShadow.addItem(new Item("a shadow cloak", "cloak"));
+
+    }
+    private void addEnemiesToRooms() {
+        MeleeWeapon capitalism = new MeleeWeapon("capitalism", "capital" , 10);
+       time.addEnemy(new Enemy("coorporations", 100, capitalism));
+
+        RangedWeapon isolation = new RangedWeapon("Isolation", "isolation", 5, 5);
+        theLine.addEnemy(new Enemy("The void",80, isolation));
+
+
 
         //--------------------------------------------- add more items to room if needed
     }

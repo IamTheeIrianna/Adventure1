@@ -10,7 +10,6 @@ public class Player {
     public Player(Room startingRoom) {
         this.currentRoom = startingRoom;
         this.inventory = new ArrayList<>();
-        //---------------------------------------------
         this.health = 100; // Example starting health
     }
     //---------------------------------------------
