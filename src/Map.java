@@ -1,6 +1,6 @@
 public class Map {
 
-    private Room theLine, theStone, theBronze, time, ironDome, theFall, eraOfEval, renaissance,theEntrapment;
+    private Room theLine, theStone, theBronze, time, ironDome, theFall, digitalFrontier, ageOfEnlightenment, theCosmicAge;
 
     public Map() {
         createRooms();
@@ -10,15 +10,15 @@ public class Map {
     //---------------------------------------------
 //room creation
     private void createRooms() {
-      theLine = new Room("The line of existence", "In the dark with nothing but an infinite luminous line");
+      theLine = new Room("The line of existence", "A dark space with nothing but an infinite luminous line");
       theStone = new Room("The age of the stone", "You are in the DOS dimension. A place in the dark where luminous lines begin to attatch, \nforming luminous floating geometric shapes");
-      theBronze = new Room("Age of bronze", "The particles of light have multiplied into a dark luminous tree dimensional forest ");
-      time = new Room("Room 4", "You are on a spaceship.");
-      ironDome = new Room("Room 5", "You are in the central chamber.");
-      theFall = new Room("Room 6", "You are in a tranquil garden.");
-      eraOfEval = new Room("Room 7", "You are in a bustling market.");
-      renaissance = new Room("Room 8", "You are on a high mountain.");
-      theEntrapment = new Room("Room 9", "You are in an ancient temple.");
+      theBronze = new Room("Age of bronze", "Particles of light, in the dark, have multiplied into a dark luminous tree dimensional forest ");
+      time = new Room("Time", "Here, few have escaped. The only escape is to travel through or demise.");
+      ironDome = new Room("The Iron Dome", "A smoke-filled landscape dominated by machinery where progress \ncomes at a cost, changing nature as we know it.");
+      theFall = new Room("The fall", "A field of tragedies, overpopulated by universes that hold infectious particles within their microcosm");
+      ageOfEnlightenment = new Room("The Age of enlightenment", "Here, in the new world, as above, so below. A landscape filled with libraries and gardens, knowledge reinvents the wheel.  ");
+      digitalFrontier = new Room("The Digital Frontier", "An expansive digital landscape filled with neon lights, \ncode streams, and virtual constructs.");
+      theCosmicAge = new Room("The Cosmic age", "An ethereal realm filled with stars, nebulae, and cosmic phenomena, \nwhere time bends and reality shifts.");
     }
     //---------------------------------------------
     //room location setters
@@ -35,22 +35,22 @@ public class Map {
         theBronze.setSouth(theFall);
 
         time.setNorth(theLine);
-        time.setSouth(eraOfEval);
+        time.setSouth(digitalFrontier);
 
-        ironDome.setSouth(renaissance);
+        ironDome.setSouth(ageOfEnlightenment);
 
         theFall.setNorth(theBronze);
-        theFall.setSouth(theEntrapment);
+        theFall.setSouth(theCosmicAge);
 
-        eraOfEval.setNorth(time);
-        eraOfEval.setEast(renaissance);
+        digitalFrontier.setNorth(time);
+        digitalFrontier.setEast(ageOfEnlightenment);
 
-        renaissance.setNorth(ironDome);
-        renaissance.setWest(eraOfEval);
-        renaissance.setEast(theEntrapment);
+        ageOfEnlightenment.setNorth(ironDome);
+        ageOfEnlightenment.setWest(digitalFrontier);
+        ageOfEnlightenment.setEast(theCosmicAge);
 
-        theEntrapment.setNorth(theFall);
-        theEntrapment.setWest(renaissance);
+        theCosmicAge.setNorth(theFall);
+        theCosmicAge.setWest(ageOfEnlightenment);
 
         //---------------------------------------------
     }
