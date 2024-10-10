@@ -14,6 +14,7 @@ public class Player {
     }
     //---------------------------------------------
     public void takeDamage(int damage) {
+        health -= damage;
         if (health <= 0) {
             System.out.println("D.E.F.E.A.T.E.D.");
         } else {

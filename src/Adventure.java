@@ -120,7 +120,7 @@ public class Adventure {
         Weapon equippedWeapon = player.getEquippedWeapon();
         //----------------------------------------------
         if(equippedWeapon == null) {
-            System.out.println("Equip weapon from inventory or move to retrospecitve room");
+            System.out.println("Equip weapon from inventory");
             return;
             //----------------------------------------------
         }
@@ -139,19 +139,21 @@ public class Adventure {
                 System.out.println("there is no enemies in this room");
                 return;
             }
-            System.out.println("Attack" + targetEnemy.getName() + "with the" + equippedWeapon.getLongName() + "!");
+            System.out.println("Attack " + targetEnemy.getName() + " with the " + equippedWeapon.getLongName() + "!");
             targetEnemy.takeDamage(equippedWeapon.getDamage());
 
             //----------------------------------------------
-            if(targetEnemy.getHealth() > 0) {
-                targetEnemy.attack(player);
+           if(targetEnemy.isAlive()){
+               targetEnemy.attack(player);
 //----------------------------------------------
             } else {
                 player.getCurrentRoom().removeEnemy(targetEnemy);
-                System.out.println(targetEnemy.getName() + "has been defeated!!!");
+                Item droppedWeapon = targetEnemy.dropWeapon();
+                player.getCurrentRoom().addItem(droppedWeapon);
+                System.out.println(targetEnemy.getName() + " has been defeated!!!");
             }
         } else {
-            System.out.println("you've attacked the air with " + equippedWeapon.getLongName() + "!");
+            System.out.println("you've attacked the air with " + equippedWeapon.getLongName() + "! ");
             equippedWeapon.use();
 
         }
