@@ -15,6 +15,7 @@ public class Player {
     //---------------------------------------------
     public void takeDamage(int damage) {
         health -= damage;
+        System.out.println("you've taken " + damage + " damage");
         if (health <= 0) {
             System.out.println("D.E.F.E.A.T.E.D.");
         } else {
@@ -25,7 +26,9 @@ public class Player {
     public void equipWeapon(Weapon weapon) {
         if(inventory.contains(weapon)) {
             this.equippedWeapon = weapon;
-            System.out.println("The weapon is not in your inventory");
+            System.out.println("you've equipped " + weapon.getLongName());
+        } else {
+            System.out.println("This weapon is not in your inventory");
         }
     }
     //---------------------------------------------
@@ -70,11 +73,4 @@ public class Player {
         }
         return null; // Not found
     }
-    //----------------------------------------
-    /*
-    // Attack method
-    public void attack(Enemy enemy) {
-        System.out.println("You've attacked" + enemy.getName() + "!");
-        enemy.takeDamage(10); // Example damage value
-    }*/
 }
