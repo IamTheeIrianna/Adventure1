@@ -23,13 +23,16 @@ public class Enemy {
             System.out.println(name + " has been defeated!");
         }
     }
+    //------------------------------------------
     public void attack(Player player) {
         System.out.println(name + " you've been attacked with a " + weapon.getLongName() + "!");
         player.takeDamage(weapon.getDamage());
     }
+    //------------------------------------------
     public boolean isAlive(){
         return health > 0;
     }
+    //------------------------------------------
     public Weapon dropWeapon(){
         return weapon;
     }

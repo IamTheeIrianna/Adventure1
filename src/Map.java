@@ -23,6 +23,7 @@ public class Map {
     }
     //---------------------------------------------
     //room location setters
+    //------------------------------------------
     private void connectRooms() {
 
         //map setting
@@ -52,13 +53,10 @@ public class Map {
 
         theCosmicAge.setNorth(theFall);
         theCosmicAge.setWest(ageOfEnlightenment);
-
-        //---------------------------------------------
     }
     //---------------------------------------------
     private void addItemsToRooms() {
-        // Add items to rooms as per requirements
-        theDream.addItem(new Item(" ", " "));
+        theDream.addItem(new Item("Dream catcher ", "dream "));
         ageOfEnlightenment.addItem(new Item(" ", " "));
 
         theLine.addItem(new Item("a shiny brass lamp", "lamp"));
@@ -67,16 +65,14 @@ public class Map {
         theShadow.addItem(new Food("a healing potion", "potion", 20));
         theShadow.addItem(new RangedWeapon("Bow and Arrow", "bow", 5, 10));
         theShadow.addItem(new Item("a shadow cloak", "cloak"));
-
+        //------------------------------------------
     }
     private void addEnemiesToRooms() {
-        MeleeWeapon capitalism = new MeleeWeapon("capitalism", "capital" , 10);
-        time.addEnemy(new Enemy("coorporations", 100, capitalism));
+        MeleeWeapon capitalism = new MeleeWeapon("B", "capital" , 10);
+        industrialChaos.addEnemy(new Enemy("A", 100, capitalism));
 
         RangedWeapon isolation = new RangedWeapon("Isolation", "isolation", 5, 5);
         theLine.addEnemy(new Enemy("The void",80, isolation));
-
-
 
         //--------------------------------------------- add more items to room if needed
     }

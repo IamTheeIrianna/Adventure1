@@ -10,7 +10,7 @@ public class Player {
     public Player(Room startingRoom) {
         this.currentRoom = startingRoom;
         this.inventory = new ArrayList<>();
-        this.health = 100; // Example starting health
+        this.health = 100; // player statr health
     }
     //---------------------------------------------
     public void takeDamage(int damage) {
@@ -60,11 +60,11 @@ public class Player {
     public void addItem(Item item) {
         inventory.add(item);
     }
-
+    //------------------------------------------
     public void removeItem(Item item) {
         inventory.remove(item);
     }
-
+    //------------------------------------------
     public Item findItem(String itemName) {
         for (Item item : inventory) {
             if (item.getShortName().equalsIgnoreCase(itemName)) {

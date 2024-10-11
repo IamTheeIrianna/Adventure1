@@ -1,4 +1,4 @@
-public class RangedWeapon extends Weapon {
+ public class RangedWeapon extends Weapon {
     private int uses;
     private final int damage;
 

@@ -6,7 +6,7 @@ public class Adventure {
     private final Player player;
 
     //--------------------------------------------
-    // Constructor for Adventure class
+    // game cosstructor
     public Adventure() {
         scanner = new Scanner(System.in);
         Map map = new Map();
@@ -15,6 +15,7 @@ public class Adventure {
         welcomeMessage(); // Display the welcome message
     }
 
+    //------------------------------------------------
     // Method to display the welcome message
     private void welcomeMessage() {
         System.out.println("\nWelcome to the adventure game!");
@@ -32,13 +33,14 @@ public class Adventure {
         System.out.println("\nEnter [start] to start the game.");
 
     }
+
     //----------------------------------------------
     // Method to start the game
     public void startGame() {
         String input = scanner.nextLine(); // User input reader
 
         if (input.equalsIgnoreCase("start")) {
-            displayCurrentRoom(); // Display current room details
+            displayCurrentRoom();
             gameLoop(); // Start the game loop
 
         } else {
@@ -47,6 +49,7 @@ public class Adventure {
         }
     }
 
+    //----------------------------------------
     //  game logic execution loop
     private void gameLoop() {
         while (true) {
@@ -64,10 +67,10 @@ public class Adventure {
                 displayCurrentRoom(); // Display the current room details
 
             } else if (input.equalsIgnoreCase("help")) {
-                displayHelpMessage(); // Display 'help' message
+                displayHelpMessage(); // help message
 
             } else if (input.startsWith("take ")) {
-                takeItem(input.substring(5)); // Take an item from the room
+                takeItem(input.substring(5)); // Take item method
 
             } else if (input.startsWith("drop ")) {
                 dropItem(input.substring(5)); // Drop an item from the inventory
@@ -90,10 +93,11 @@ public class Adventure {
         }
     }
 
+    //---------------------------------------------------
     private void navigate(String direction) {
         Room nextRoom;
         switch (direction) {
-            case "north","n", "go north", "NORTH", "GO NORTH":
+            case "north", "n", "go north", "NORTH", "GO NORTH":
                 nextRoom = player.getCurrentRoom().getNorth(); // Get the room to the north
                 break;
             case "south", "go south", "SOUTH", "GO SOUTH":
@@ -113,10 +117,11 @@ public class Adventure {
             player.setCurrentRoom(nextRoom); // Set the player's current room to the next room
             displayCurrentRoom(); // Show new room descript after new nav
         } else {
-            System.out.println("You can't go that way."); // No room in the specified direction
+            System.out.println("You can't go that way.");
         }
     }
 
+    //-------------------------------------------------
     private void displayCurrentRoom() {
         Room currentRoom = player.getCurrentRoom();
         System.out.println(currentRoom.getName());
@@ -132,6 +137,7 @@ public class Adventure {
         displayItemsInCurrentRoom(); // Display items in the current room
     }
 
+    //------------------------------
     private void displayItemsInCurrentRoom() {
         ArrayList<Item> items = player.getCurrentRoom().getItems();
 
@@ -145,6 +151,7 @@ public class Adventure {
         }
     }
 
+    //------------------------------------------
     private void showInventory() {
         ArrayList<Item> inventory = player.getInventory();
 
@@ -158,6 +165,7 @@ public class Adventure {
         }
     }
 
+    //------------------------------------------
     private void takeItem(String itemName) {
         Room currentRoom = player.getCurrentRoom(); // Get the current room
         for (Item item : currentRoom.getItems()) {
@@ -170,7 +178,7 @@ public class Adventure {
         }
         System.out.println("Item unavailable.");
     }
-
+    //------------------------------------------
     private void dropItem(String itemName) {
         Item itemToDrop = player.findItem(itemName);
 
@@ -183,6 +191,7 @@ public class Adventure {
         }
     }
 
+    //------------------------------------------
     private void eatFood(String foodName) {
         Item food = player.findItem(foodName);
 
@@ -195,6 +204,7 @@ public class Adventure {
         }
     }
 
+    //------------------------------------------
     private void equipWeapon(String weaponName) {
         Weapon weaponToEquip = (Weapon) player.findItem(weaponName);
 
@@ -205,6 +215,7 @@ public class Adventure {
             System.out.println("weapon unavailable.");
         }
     }
+    //------------------------------------------
     private void attack(String enemyName) {
         Enemy targetEnemy = null;
 
@@ -214,14 +225,12 @@ public class Adventure {
                 break;
             }
         }
-
+        //------------------------------------------
         Weapon equippedWeapon = player.getEquippedWeapon();
-
         if (equippedWeapon == null) {
             System.out.println("Please choose a weapon to equip");
             return;
         }
-
         if (targetEnemy != null) {
             int damageDealt = equippedWeapon.getDamage();
             targetEnemy.takeDamage(damageDealt);
@@ -241,6 +250,7 @@ public class Adventure {
         }
     }
 
+    //------------------------------------------
     private void displayHelpMessage() {
         System.out.println("\n--- Help Menu ---");
         System.out.println("\nUse the following commands to navigate between rooms:\n- north \n- east \n- south \n- west.");
