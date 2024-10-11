@@ -5,7 +5,7 @@ public class Adventure {
     private final Scanner scanner;
     private final Player player;
 
-    //---------------------------------------------
+    //--------------------------------------------
     // Constructor for Adventure class
     public Adventure() {
         scanner = new Scanner(System.in);
