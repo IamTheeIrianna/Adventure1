@@ -1,39 +1,34 @@
 public class Enemy {
-    private String name;
+
+    private final String enemyName;
     private int health;
     private Weapon weapon;
-    //---------------------------------------------
+
     public Enemy(String name, int health, Weapon weapon) {
-        this.name = name;
+        this.enemyName = name;
         this.health = health;
         this.weapon = weapon;
+
     }
-    //---------------------------------------------
-    public String getName() {
-        return name;
+    public String getEnemyName() {
+        return enemyName;
     }
 
     public int getHealth() {
         return health;
     }
-    //---------------------------------------------
-    public void takeDamage(int damage) {
-        health -= damage;
-        if (health <= 0) {
-            System.out.println(name + " has been defeated!");
-        }
-    }
-    //------------------------------------------
+
     public void attack(Player player) {
-        System.out.println(name + " you've been attacked with a " + weapon.getLongName() + "!");
-        player.takeDamage(weapon.getDamage());
+        int attackDamage = weapon.getDamage();
+        player.decreaseHealth(attackDamage);
     }
-    //------------------------------------------
-    public boolean isAlive(){
-        return health > 0;
-    }
-    //------------------------------------------
-    public Weapon dropWeapon(){
-        return weapon;
+
+    public void hit(int damage) {
+        health -= damage; // Reduce enemy's health by damage taken
+        System.out.println(enemyName + " has taken  " + damage + "  in damage");
+
+        if (health <= 0) {
+            System.out.println(enemyName + " has been absolved");
+        }
     }
 }

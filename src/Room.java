@@ -3,77 +3,53 @@ import java.util.ArrayList;
 public class Room {
     private String name;
     private String description;
-    private Room north;
-    private Room east;
-    private Room south;
-    private Room west;
+    private Room north, south, east, west;
     private ArrayList<Item> items;
-    private ArrayList<Enemy> enemies; //array list to hold enemies
-    //---------------------------------------------
+    private ArrayList<Enemy> enemies;
+
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
-        items = new ArrayList<>();
-        enemies = new ArrayList<>(); //enemy list initializer
+        this.items = new ArrayList<>();
+        this.enemies = new ArrayList<>();
     }
-    //---------------------------------------------
-    //add enemy to room method
-    public void addEnemy(Enemy enemy) {
-        enemies.add(enemy);
+
+    public void setNorth(Room room) { this.north = room; }
+    public void setSouth(Room room) { this.south = room; }
+    public void setEast(Room room) { this.east = room; }
+    public void setWest(Room room) { this.west = room; }
+
+    public Room getNorth() { return north; }
+    public Room getSouth() { return south; }
+    public Room getEast() { return east; }
+    public Room getWest() { return west; }
+
+    public String getDescription() {
+        return description;
     }
-    //---------------------------------------------
-     public void removeEnemy(Enemy enemy) {
-        enemies.remove(enemy);
-    }
-    //---------------------------------------------
-    public ArrayList<Enemy> getEnemies() {
-        return enemies;
-    }
-    //---------------------------------------------
+
     public void addItem(Item item) {
         items.add(item);
     }
-    //---------------------------------------------
-    public void removeItem(Item item) {
-        items.remove(item);
+
+    public void addEnemy(Enemy enemy){
+        enemies.add(enemy);
     }
-    //---------------------------------------------
-    public ArrayList<Item> getItems() {
-        return items;
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
     }
-    //---------------------------------------------
-    public boolean hasItem(String shortName) {
+
+    public Item removeItem(String itemName) {
         for (Item item : items) {
-            if (item.getShortName().equalsIgnoreCase(shortName)) {
-                return true; // Item exists in the room
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                items.remove(item);
+                return item;
             }
         }
-        return false; // Item not found
-    }
-    //---------------------------------------------
-    public String getDescription() {
-        return description; // Method to get room description
+        return null; // Item not found
     }
 
-    public String getName() {
-        return name; // Method to get room name
-    }
-    //---------------------------------------------
-    // Setters for room connections
-    public void setNorth(Room north) { this.north = north; }
-
-    public void setEast(Room east) { this.east = east; }
-
-    public void setSouth(Room south) { this.south = south; }
-
-    public void setWest(Room west) { this.west = west; }
-    //---------------------------------------------
-    // Getters for room connections
-    public Room getNorth() { return north; }
-
-    public Room getEast() { return east; }
-
-    public Room getSouth() { return south; }
-
-    public Room getWest() { return west; }
+    public ArrayList<Item> getItems() { return items; }
 }
+

@@ -1,22 +1,17 @@
 public class Item {
-    private final String longName;
-    private final String shortName;
-    //---------------------------------------------
-    public Item(String longName, String shortName) {
-        this.longName = longName;
+    private String name;
+    private String shortName;
+
+
+    public Item(String name, String shortName) {
+        this.name = name;
         this.shortName = shortName;
     }
 
-    public String getLongName() {
-        return longName;
-    }
+    public String getName() {
+        return name; }
 
-    public String getShortName() {
-        return shortName;
-    }
-    public String getDescription() {
-        return "Item: " + longName + ", (" + shortName + ")";
+    public String getshortName() {
+        return shortName; // Getter for short name
     }
 }
-
-

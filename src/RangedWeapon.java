@@ -1,11 +1,15 @@
- public class RangedWeapon extends Weapon {
+public class RangedWeapon extends Weapon {
+    private int damage;
+    private int range;
     private int uses;
-    private final int damage;
 
-    public RangedWeapon(String longName, String shortName, int uses, int damage) {
-        super(longName, shortName);
-        this.uses = uses;
+
+
+    public RangedWeapon(String name, String shortName, int damage, int range, int uses) {
+        super(name, shortName);
         this.damage = damage;
+        this.range = range;
+        this.uses = uses;
     }
     @Override
     public int remainingUses() {
@@ -16,34 +20,20 @@
         return uses > 0;
     }
     @Override
-    public int getDamage() {
-    return damage;
+    public int getRange() {
+        return range;
     }
     @Override
-    public void use () {
+    public int getDamage() {
+        return damage;
+    }
+    @Override
+    public void use() {
         if (canUse()) {
             uses --;
-            System.out.println("fire your" + getLongName() + "!");
+            System.out.println("fire your" + getName() + "!");
         } else {
-            System.out.println("you have now more ammunition in" + getLongName() + "!");
-
-
+            System.out.println("you have now more ammunition in" + getshortName() + "!" + damage);
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
